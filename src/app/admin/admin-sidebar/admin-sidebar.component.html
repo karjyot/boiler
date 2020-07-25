@@ -1,0 +1,64 @@
+
+    <div class="sidebars" id="contain" style="height:100%">
+                <nav class="sidebar-nav">
+                  <ul class="nav" style="    padding-top: 54px;">
+                    <li class="nav-item" style="cursor: pointer;" (click) = "redirectUrl('dashboard')">
+                      <a class="nav-link"  [ngClass]="{'adminActive':selectedPage == 'dashboard'}">
+                        <i class="nav-icon icon-speedometer"></i> Dashboard
+                     
+                      </a>
+                    </li>
+                    <li class="nav-item" (click) = "redirectUrl('users')" style="cursor: pointer;">
+                      <a class="nav-link "  [ngClass]="{'adminActive':selectedPage == 'users'}">
+                        <i class="nav-icon icon-user"></i> Users</a>
+                    </li>
+                    <li class="nav-item" (click) = "redirectUrl('questions')" style="cursor: pointer;">
+                      <a class="nav-link "  [ngClass]="{'adminActive':selectedPage == 'questions'}">
+                        <i class="nav-icon icon-user"></i> Questions</a>
+                    </li>
+                    <li class="nav-item"  (click) = "redirectUrl('categories')" style="cursor: pointer;">
+                      <a class="nav-link"  [ngClass]="{'adminActive':selectedPage == 'categories'}">
+                        <i class="nav-icon icon-people"></i> Categories</a>
+                    </li>
+                    <li class="nav-item"  (click) = "redirectUrl('products')" style="cursor: pointer;">
+                      <a class="nav-link"  [ngClass]="{'adminActive':selectedPage == 'products'}">
+                        <i class="nav-icon icon-power"></i> Products</a>
+                    </li>
+                    <li class="nav-item"  (click) = "redirectUrl('controls')" style="cursor: pointer;">
+                      <a class="nav-link"  [ngClass]="{'adminActive':selectedPage == 'controls'}">
+                        <i class="nav-icon icon-power"></i> Controls</a>
+                    </li>
+                    <li class="nav-item"  (click) = "redirectUrl('bookings')" style="cursor: pointer;">
+                      <a class="nav-link"  [ngClass]="{'adminActive':selectedPage == 'bookings'}">
+                        <i class="nav-icon icon-credit-card"></i> Bookings</a>
+                    </li>
+                    <li class="nav-item"  (click) = "redirectUrl('booking-diary')" style="cursor: pointer;">
+                      <a class="nav-link"  [ngClass]="{'adminActive':selectedPage == 'booking-diary'}">
+                        <i class="nav-icon icon-credit-card"></i>Booking Diary</a>
+                    </li>
+                    <li class="nav-item"  (click) = "redirectUrl('video-diary')" style="cursor: pointer;">
+                      <a class="nav-link"  [ngClass]="{'adminActive':selectedPage == 'video-diary'}">
+                        <i class="nav-icon icon-credit-card"></i>Video Diary</a>
+                    </li>
+                    <li class="nav-item"  (click) = "redirectUrl('breakdowns')" style="cursor: pointer;">
+                      <a class="nav-link"  [ngClass]="{'adminActive':selectedPage == 'breakdowns'}">
+                        <i class="nav-icon icon-power"></i> Breakdowns</a>
+                    </li>
+
+                    <li class="nav-item"  (click) = "redirectUrl('postal-codes')" style="cursor: pointer;">
+                      <a class="nav-link"  [ngClass]="{'adminActive':selectedPage == 'postal-codes'}">
+                        <i class="nav-icon icon-settings"></i> Postcodes</a>
+                    </li>
+
+                    
+         
+                        <li class="nav-item"  (click) = "redirectUrl('cms')" style="cursor: pointer;">
+                          <a class="nav-link"  [ngClass]="{'adminActive':selectedPage == 'cms'}">
+                            <i class="nav-icon icon-screen-smartphone"></i> CMS</a>
+                        </li>
+                  </ul>
+                </nav>
+               
+              </div>
+
+         

@@ -1,0 +1,463 @@
+   <div class="whats-next-block">
+     <div class="container">
+       <div class="whts-grid">
+         <div class="g-col g-span12 co-whats-next__inner">
+          <div class="whats-next__header">
+            <h3 class="copy copy--theme-dark h5" tabindex="-1">What happens next?</h3>
+          </div>
+
+          <div class="whats-next-steps">
+            <div class="whats-next-step">
+              <div class="whts-next-icon">1</div>
+              <p class="whts-next-text">We will process your order.</p>
+            </div>
+            <div class="whats-next-step">
+              <div class="whts-next-icon">2</div>
+              <p class="whts-next-text">Your video survey will take place at the date and time you choose.</p>
+            </div>
+            <div class="whats-next-step">
+              <div class="whts-next-icon">3</div>
+              <p class="whts-next-text">Your new boiler will be fitted on the day you choose.</p>
+            </div>
+          </div>
+
+
+         </div>
+       </div>
+     </div>
+   </div>
+   
+   <div class="payment-block">
+        <div class="row">
+            <div class="payment-left">
+                  <div id="accordion">
+                      <div class="card">
+                        <div class="card-header" id="headingOne">
+                          <h5 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                              <div class="acc-title"><span>1</span><h4>Installation Date : <b style="color:green">{{installationDate | date}}</b></h4></div>
+                            </button>
+                          </h5>
+                     
+                          
+                        </div>
+
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                          <div class="card-body">
+                            <div class="head-1-text text-bigger">
+                              <p *ngIf="cmsData" [innerHtml] = "cmsData.installationText">
+                              
+                              </p>
+                             
+                            </div>
+                            <div class="col-md-4">
+                              <div class="btn-group">
+                                <div
+                                  class="btn btn-primary"
+                                  mwlCalendarPreviousView
+                                  [view]="view"
+                                  [(viewDate)]="viewDate"
+                                  (viewDateChange)="closeOpenMonthViewDay()"
+                                >
+                                  Previous
+                                </div>
+                                <div
+                                  class="btn btn-outline-secondary"
+                                  mwlCalendarToday
+                                  [(viewDate)]="viewDate"
+                                >
+                                  Today
+                                </div>
+                                <div
+                                  class="btn btn-primary"
+                                  mwlCalendarNextView
+                                  [view]="view"
+                                  [(viewDate)]="viewDate"
+                                  (viewDateChange)="closeOpenMonthViewDay()"
+                                >
+                                  Next
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-4" style="margin-top: 13px;">
+                              <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+                            </div>
+                            <ng-template
+                            #customCellTemplate
+                            let-day="day"
+                            let-openDay="openDay"
+                            let-locale="locale"
+                            let-tooltipPlacement="tooltipPlacement"
+                            let-highlightDay="highlightDay"
+                            let-unhighlightDay="unhighlightDay"
+                            let-eventClicked="eventClicked"
+                            let-tooltipTemplate="tooltipTemplate"
+                            let-tooltipAppendToBody="tooltipAppendToBody"
+                            let-tooltipDelay="tooltipDelay"
+                            let-trackByEventId="trackByEventId"
+                            let-validateDrag="validateDrag"
+                          >
+                            <div class="cal-cell-top">
+                              <span class="cal-day-badge" *ngIf="day.badgeTotal > 0">{{
+                                day.badgeTotal
+                              }}</span>
+                              <span class="cal-day-number">{{
+                                day.date | calendarDate: 'monthViewDayNumber':locale
+                              }}</span>
+                            </div>
+                            <div class="cal-events" *ngIf="day.events.length > 0">
+                              <div
+                                class="cal-event"
+                               
+                              ></div>
+                              <span style="color:red;font-size:10px">
+                                {{day.events[0].title}}
+                              </span>
+                            </div>
+                            <div class="cal-events" *ngIf="day.events.length == 0 && day.cssClass !='cal-disabled'">
+                              <div
+                                class="cal-event"
+                               style="background-color: green !important"
+                              ></div>
+                              <span class="calendar-class" style="color:green;font-size:10px">
+                               
+                                Available
+                              </span>
+                            </div>
+                          </ng-template>
+
+
+                            <mwl-calendar-month-view
+                            [events]="eventsData"
+                            [viewDate]="viewDate"
+                            [refresh]="refresh"
+                            (dayClicked)="handleDateClick($event)"
+                            [cellTemplate]="customCellTemplate"
+                            (beforeViewRender)="beforeMonthViewRender($event)" 
+                            weekStartsOn="1"
+                            
+
+                   
+                            
+                          > </mwl-calendar-month-view>
+                            <!-- <full-calendar  #calendar1 [options]="calendarOptions"></full-calendar> -->
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <div class="card"  [ngClass]="{'disableRow':  !installationDate}">
+                        <div class="card-header" id="video">
+                          <h5 class="mb-0" (click)="openVideo()">
+                            
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#videoOne" aria-expanded="true" aria-controls="videoOne">
+                              <div class="acc-title"><span>2</span><h4>Pre-install Video Survey: <b style="color:green">{{videDate | date:'short'}}</b></h4></div>
+                            </button>
+                          </h5>
+                        </div>
+                        
+                        <div id="videoOne" class="collapse" aria-labelledby="video" data-parent="#accordion">
+                          <div class="card-body">
+                            <div class="head-1-text text-bigger">
+                              <p *ngIf="cmsData" [innerHtml] = "cmsData.videoText">
+                              
+                              </p>
+                              <!-- <p>Your installer will arrive between 7.30 - 9.30am and your delivery will arrive separately by courier. If anything changes, we’ll be in touch.</p><p>Don’t see the date you were after? Call us on <a href="tel://08001937777">0800 193 7777</a> and we’ll see if we can install sooner.</p> -->
+                            </div>
+                            <div class="col-md-4">
+                              <div class="btn-group">
+                                <div
+                                  class="btn btn-primary"
+                                  mwlCalendarPreviousView
+                                  [view]="view1"
+                                  [(viewDate)]="viewDate1"
+                                  (viewDateChange)="closeOpenMonthViewDay()"
+                                >
+                                  Previous
+                                </div>
+                                <div
+                                  class="btn btn-outline-secondary"
+                                  mwlCalendarToday
+                                  [(viewDate)]="viewDate1"
+                                >
+                                  Today
+                                </div>
+                                <div
+                                  class="btn btn-primary"
+                                  mwlCalendarNextView
+                                  [view]="view1"
+                                  [(viewDate)]="viewDate1"
+                                  (viewDateChange)="closeOpenMonthViewDay()"
+                                >
+                                  Next
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-8" style="margin-top: 13px;">
+                              <h3>{{ viewDate1 | calendarDate:(view1 + 'ViewTitle'):'en' }}</h3>
+                            </div>
+                            <mwl-calendar-day-view
+                            [events]="events"
+                            [viewDate]="viewDate1"
+                            [refresh]="refresh" 
+                            [dayStartHour]="9"
+                            [dayEndHour]="20"
+                           
+                            (hourSegmentClicked)="hoursClick($event.date)"
+                            (beforeViewRender)="beforeViewRender($event)" 
+                            
+                          > </mwl-calendar-day-view>
+                          </div>
+                        </div>
+                      </div>
+                    
+
+
+                      <div class="card" [ngClass]="{'disableRow':  (!videDate)}">
+                        <div class="card-header" id="headingTwo">
+                          <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                              <div class="acc-title"><span>3</span><h4>Customer Details</h4></div>
+                            </button>
+                          </h5>
+                        </div>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                          <div class="card-body">
+                            <!-- Default form register -->
+                              <form [formGroup]="addressForm" (ngSubmit)="onSubmit()" class="text-center form-payment p-4"  autocomplete="off" novalidate>
+                                
+                                    <div class="form-row mb-3">
+                                      <div class="col">
+                                          <!-- Title -->
+                                          <h5>Billing Address</h5>
+                                          <label>Title</label>
+                                          <select formControlName="title" [ngClass]="{ 'is-invalid': submitted && f.title.errors }" required class="browser-default custom-select mb-3">
+                                            <option disabled="" value="" selected="selected">Select</option>
+                                            <option value="Mr">Mr</option>
+                                            <option value="Mrs">Mrs</option>
+                                            <option value="Miss">Miss</option>
+                                            <option value="Ms">Ms</option>
+                                            <option value="Dr">Dr</option>
+                                          </select>
+                                      </div>
+                                      <!-- <div class="col"> -->
+
+                                      <!-- First name -->
+                                     
+                                      </div>
+                                    <!-- </div> -->
+                                    <label>First name</label>
+                                    <input type="text" [ngClass]="{ 'is-invalid': submitted && f.fname.errors }" formControlName="fname" class="form-control mb-3" placeholder="First name">
+
+
+                                    <!-- Last name -->
+                                    <label>Last name</label>
+                                    <input type="text" [ngClass]="{ 'is-invalid': submitted && f.lname.errors }"  formControlName="lname" class="form-control mb-3" placeholder="Last name">
+
+                                    <!-- Contact number -->
+                                    <label>Contact number</label>
+                                    <input type="text" [ngClass]="{ 'is-invalid': submitted && f.contact.errors }" formControlName="contact" class="form-control mb-3" placeholder="Contact number">
+
+                                    <!-- Email address -->
+                                    <label>Email address</label>
+                                    <input type="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" formControlName="email" class="form-control mb-3" placeholder="Email address" >
+                                    
+                                    <label>Postcode</label>
+                                    <input type="text" formControlName="postalCode" [(ngModel)] = "postalCode" class="form-control mb-3" placeholder="Postcode">
+                                    <button class="btn btn-info my-4 btn-block" type="button" (click) =  "search()" >Search</button>
+                                    <select class="browser-default custom-select mb-3" *ngIf="searchCode"  formControlName="address">
+                                      <option disabled="" value="" selected="selected">Select</option>
+                                      <option value="{{data}}" *ngFor="let data of totalAddress">{{data}}</option>
+                                      
+                                    </select>
+                                    <a href="javascript:void(0)" style = "text-align: left;display: block;cursor: pointer;margin-top: 10px;margin-bottom: 10px;color:#007bff;" (click)="showAddress=!showAddress">Enter Address Manually</a>
+
+                                    <div *ngIf="showAddress">
+                                    
+
+                                      <label style="margin-top: 22px;">Address line 1</label>
+                                      <textarea type="text"  formControlName="address1" class="form-control mb-3" placeholder="Address line 1"></textarea>
+
+                                      <label style="margin-top: 22px;">Address line 2</label>
+                                      <textarea type="text"  formControlName="address2" class="form-control mb-3" placeholder="Address line 2"></textarea>
+
+                                      <label style="margin-top: 22px;">Address line 3</label>
+                                      <textarea type="text"  formControlName="address3" class="form-control mb-3" placeholder="Address line 3"></textarea>
+                                      
+                                      <label>City</label>
+                                      <input type="text" formControlName="city" class="form-control mb-3" placeholder="City">
+                                    
+                                    <label>County</label>
+                                    <input type="text" formControlName="country" class="form-control mb-3" placeholder="County">
+                                  
+
+                                      <label>Postcode</label>
+                                      <input type="text" formControlName="postalCode1" class="form-control mb-3" placeholder="Postcode">
+                                    </div>
+
+                                    <label>Installation address?</label>
+                                    <select class="browser-default custom-select mb-3"   [ngClass]="{ 'is-invalid': submitted && f.addressSelection.errors }" (change) = "addressCheck()" formControlName = "addressSelection">
+                                      <option value="">Please select</option>
+                                      <option value="same">Same as above</option>
+                                      <option value="different">Different Address</option>
+                                      </select>
+
+                                      <div *ngIf="showAddressPostalCode" style="padding-top: 15px;">
+                                        <label>Postcode</label>
+                                        <input type="text" formControlName="postalCodeInstall" [(ngModel)] = "postalCode" class="form-control mb-3" placeholder="Postcode">
+                                        <button class="btn btn-info my-4 btn-block" type="button" (click) =  "search()" >Search</button>
+
+                                        <select class="browser-default custom-select mb-3" *ngIf="searchCode"  formControlName="addressInstall">
+                                          <option disabled="" value="" selected="selected">Select</option>
+                                          <option value="{{data}}" *ngFor="let data of totalAddress">{{data}}</option>
+                                          
+                                        </select>
+
+                                        <a href="javascript:void(0)" style = "text-align: left;display: block;cursor: pointer;margin-top: 10px;margin-bottom: 10px;color:#007bff;" (click)="showAddressInstall=!showAddressInstall">Enter Address Manually</a>
+
+                                      </div>
+
+                                      <div *ngIf="showAddressInstall">
+                                    
+
+                                        <label style="margin-top: 22px;">Address line 1</label>
+                                        <textarea type="text"  formControlName="address1Install" class="form-control mb-3" placeholder="Address line 1"></textarea>
+  
+                                        <label style="margin-top: 22px;">Address line 2</label>
+                                        <textarea type="text"  formControlName="address2Install" class="form-control mb-3" placeholder="Address line 2"></textarea>
+                                        
+                                        <label style="margin-top: 22px;">Address line 3</label>
+                                      <textarea type="text"  formControlName="address3Install" class="form-control mb-3" placeholder="Address line 3"></textarea>
+                                      
+                                      <label>City</label>
+                                      <input type="text" formControlName="cityInstall" class="form-control mb-3" placeholder="City">
+                                    
+                                    <label>County</label>
+                                    <input type="text" formControlName="countryInstall" class="form-control mb-3" placeholder="County">
+
+                                        <label>Postcode</label>
+                                        <input type="text" formControlName="postalCode2Install" class="form-control mb-3" placeholder="Postcode">
+                                      </div>
+                                   
+                                    <!-- Notes or comments -->
+                                    <!-- <label>Notes or comments</label>
+                                    <textarea class="form-control mb-3"  formControlName="notes" rows="3" placeholder="Message"></textarea> -->
+                                    <!-- Sign up button -->
+                                    <button class="btn btn-info my-4 btn-block" type="submit">Next</button>
+                              </form>
+                              <!-- Default form register --> 
+                          </div>
+                        </div>
+                      </div>
+             
+                      <div class="card" [ngClass]="{'disableRow': installationForm.invalid}">
+                        <div class="card-header" id="headingThree">
+                          <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false"  href="#" aria-controls="collapseThree">
+                              <div class="acc-title"><span>4</span><h4>Payment</h4></div>
+                            </button>
+                          </h5>
+                          
+                          
+                        </div>
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                          <div class="card-body">
+                            <form novalidate (ngSubmit)="buy()" [formGroup]="stripeTest" class="form-payment p-4">
+                              <div class="row">
+                                <div class="head-1-text text-bigger">
+                                  <p *ngIf="cmsData">{{cmsData.paymentText}}</p>
+                                </div>
+                                <div class="col-sm-7 col-md-7 col-xs-12 mt-3">
+                                  <input type="text" formControlName="name" placeholder="Cardholder name" class="form-control">
+                                  
+                                </div>
+                                <div class="col-sm-5 col-md-5 col-xs-12 mt-3 payment-img">
+                                  <img src="assets/images/stripe-payment.png" class="img-fluid">
+                                </div>
+                                <div class="col-sm-12 col-md-12 col-xs-12 mt-3">
+                                  <ngx-stripe-card  [options]="cardOptions" [elementsOptions]="elementsOptions" class="stripe-box form-control"></ngx-stripe-card>
+                                </div>
+                                <div class="col-sm-12 col-md-12 col-xs-12 mt-3">
+                                <div class="review-terms"><div class="form-controlGroup"><label class="control control--custom" for="accept-terms"><input class="control--custom-input" id="accept-terms" name="accept" type="checkbox" formControlName="checkboxTerms"><span class="control-indicator control-indicator--checkbox"></span> I agree to <strong><a routerLink="/terms" target="_blank" style="color:#f21d2e;text-transform: none;">Direct Heating Terms &amp; Conditions</a></strong></label></div></div></div>
+                             
+                              <div class="col-sm-3 col-md-3 col-xs-12">
+                                <button type="submit" class="button btn btn-info my-4 btn-block">
+                                  BUY
+                                </button>
+                              </div>
+                            </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+            </div>
+            <div class="payment-right">
+              <h3 class="text-center" style="font-size: 24px;
+              margin-bottom: 15px;">Your new boiler package</h3>
+             
+              <div class="sidebar-wrapper-right">
+                <div class="sidebar-item" *ngIf="selectedBoiler">
+                  <div class="row">
+                    <div class="image-sidebar">
+                      <img src="{{selectedBoiler.image}}">
+                    </div>
+                    <div class="sidebar-text">
+                      <span>{{selectedBoiler.boiler_name}}</span>
+                    </div>
+                    <div class="co-basket-item__end"><div class="sidebar-price">£{{selectedBoiler.price}}</div></div>
+                  </div>
+                </div>
+               
+
+               
+
+                <div class="sidebar-item" *ngFor="let down of breakDowns">
+                  <div class="row">
+                    <div class="image-sidebar tick">
+                      <img src="assets/images/tick.png">
+                    </div>
+                    <div class="sidebar-text">
+                      <span>{{down.name}}</span>
+                    </div>
+                    <div class="co-basket-item__end"><div class="sidebar-price">INCLUDED</div></div>
+                  </div>
+                </div>
+                <div class="sidebar-item" >
+                  <div class="row">
+                    <div class="image-sidebar">
+                      <img src="{{controlObj.image}}">
+                    </div>
+                    <div class="sidebar-text">
+                      <span>{{controlObj.name}}</span>
+                    </div>
+                    <div class="co-basket-item__end"><div class="sidebar-price" *ngIf="controlObj.price !=0">£{{controlObj.price}}</div>
+                    <div class="sidebar-price" *ngIf="controlObj.price ==0">FREE</div>
+                  </div>
+                  </div>
+                </div>
+                <div class="total-sidebar">
+                  <div class="tot-side">
+                    <h5>Total</h5>
+                  </div>
+                  <div class="tot-price">
+                    <h4 class="text-center">£ {{finalPrice | number }}</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+          
+        <ng-template #modelTerms>
+          <div class="modal-header">
+             <h4 class="modal-title pull-left">Terms & Conditions</h4>
+             <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+             <span aria-hidden="true">&times;</span>
+             </button>
+          </div>
+          <div class="modal-body">
+             <p>Are you sure you want to delete this user?</p>
+            
+          </div>
+       </ng-template>

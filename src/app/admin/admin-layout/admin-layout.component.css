@@ -1,0 +1,8 @@
+@import "../../../assets/css/admin/style.css";
+@import "../../../assets/css/admin/simple/simple-line-icons.css"; 
+html:not([dir="rtl"]) .sidebars {
+    margin-left: 0px;
+}
+.main .container-fluid {
+    padding: 73px 30px;
+}

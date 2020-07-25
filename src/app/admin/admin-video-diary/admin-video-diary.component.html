@@ -1,0 +1,436 @@
+<div class="container-fluid">
+    <div id="ui-view">
+       <div>
+          <div class="animated fadeIn">
+             <div class="card">
+                <div class="card-header">
+                   <i class="fa fa-edit"></i> Video Diary
+                   <div class="card-header-actions">
+                   </div>
+                </div>
+                <div class="card-body">
+                   <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                      <div class="row">
+                         <div class="col-sm-12 col-md-6">
+                            <div class="dataTables_length" id="DataTables_Table_0_length">
+                               <label>
+                                  Show 
+                                  <select name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" [(ngModel)]="perPage" class="custom-select custom-select-sm form-control form-control-sm">
+                                  <option value="10">10</option>
+                                  <option value="25">25</option>
+                                  <option value="50">50</option>
+                                  <option value="100">100</option>
+                                  </select>
+                                  entries
+                               </label>
+                            </div>
+                         </div>
+                         <div class="col-sm-12 col-md-6">
+                            <div id="DataTables_Table_0_filter" class="dataTables_filter searchBar"><label>Search:<input type="search" [(ngModel)]="searchText" class="form-control form-control-sm" placeholder="" aria-controls="DataTables_Table_0"></label></div>
+                         </div>
+                      </div>
+                      <div>
+                        <button _ngcontent-c4="" (click)="openEditBooking(editBooking,'')"aria-pressed="true" class="btn btn-block btn-outline-primary active btn-blue" type="button" style="    width: 111px;
+                        margin: 0 20px 17px 0;
+                        float: left
+                        ">Set Limit</button>
+                        <!-- <button _ngcontent-c4="" (click)="viewCalendar(viewAll)"aria-pressed="true" class="btn btn-block btn-outline-primary active btn-blue" type="button" style="
+                        width: 111px;
+                        margin: 0 20px 17px 0;
+                        float: left
+                        ">View Calendar</button> -->
+
+                        <button _ngcontent-c4="" (click)="defaultLimit(default)"aria-pressed="true" class="btn btn-block btn-outline-primary active btn-blue" type="button" style="
+                        width: 111px;
+                        margin: 0 0 17px 0;
+                        ">Default Limit</button>
+                     </div>
+
+                     <div>
+                        
+                     </div>
+                      <div class="row">
+                         <div class="col-sm-12">
+                            <table class="table table-striped table-bordered datatable dataTable no-footer  table-responsive-sm table-bordered table-striped table-sm" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info" style="border-collapse: collapse !important">
+                               <thead>
+                                  <tr role="row">
+                                  
+                                    <th style="width:200px;">Date</th>
+                                    <th style="width:150px;">Slots</th>
+                                   
+                                     <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Actions: activate to sort column ascending" style="width: 200.2px;">Actions</th>
+                                  </tr>
+                               </thead>
+                               <tbody>
+                                  <tr role="row" class="odd" *ngFor="let item of records| filter:searchText| paginate: { itemsPerPage: perPage, currentPage: p } index as i">
+                                    <td class="wordBreak">{{item.date}}</td>
+                                    <td class="wordBreak">{{item.booking_limit }}</td>
+                                   
+                                     <td>
+                                       <a class="btn btn-success" (click) = "openEditLimit(editLimit,item)">
+                                          <i class="fa fa-pencil"></i>
+                                          </a>
+                                        
+                                        <a class="btn btn-danger" (click) = "deleteUser(templateDelete,item.id)">
+                                        <i class="fa fa-trash-o"></i>
+                                        </a>
+                                     </td>
+                                  </tr>
+                               </tbody>
+                            </table>
+                         </div>
+                      </div>
+                      <div class="row">
+                         <div class="col-sm-12 col-md-5">
+                            <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">{{perPage}} of {{totalEntries}} entries</div>
+                         </div>
+                         <div class="col-sm-12 col-md-7">
+                            <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
+                               <ul class="pagination">
+                                  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                               </ul>
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+
+
+ <ng-template #templateDelete>
+    <div class="modal-header">
+       <h4 class="modal-title pull-left">Delete Limit</h4>
+       <button type="button" class="close pull-right" aria-label="Close" (click)="modalRefDel.hide()">
+       <span aria-hidden="true">&times;</span>
+       </button>
+    </div>
+    <div class="modal-body">
+       <p>Are you sure you want to delete this limit?</p>
+       <button _ngcontent-c4="" class="btn btn-blue" style="color: white;"  type="button" (click) = "confirmDelete()">Yes</button>
+       <button _ngcontent-c4="" class="btn btn-danger" style="margin-left:10px" type="button" (click)="modalRefDel.hide()">No</button>
+    </div>
+ </ng-template>
+ 
+ <ng-template #info>
+    <div class="modal-header">
+       <h4 class="modal-title pull-left"> Details</h4>
+       <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+       <span aria-hidden="true">&times;</span>
+       </button>
+    </div>
+    <div class="modal-body" *ngIf="currentUser">
+       <div class="container">
+          <div class="row">
+      
+            <div class="col-md-4">
+              <label>Name</label> 
+              <p>{{currentUser[0].first_name}} {{currentUser[0].last_name}}</p>
+            </div>
+
+            <div class="col-md-4">
+               <label>Contact</label> 
+               <p>{{currentUser[0].contact}}</p>
+             </div>
+
+             <div class="col-md-4">
+               <label>Email</label> 
+               <p>{{currentUser[0].email}}</p>
+             </div>
+
+
+            
+
+
+          </div>
+          <div class="row">
+      
+            <div class="col-md-4">
+              <label>Boiler</label> 
+              <p>{{fullDetails.boiler}}</p>
+            </div>
+
+            <div class="col-md-4">
+               <label>Installation Date</label> 
+               <p>{{fullDetails.booking_date}}</p>
+             </div>
+
+             <div class="col-md-4">
+               <label>Video Date</label> 
+               <p>{{fullDetails.video_date | date:'short'}}</p>
+             </div>
+      </div>
+
+      <div class="row">
+      
+         <div class="col-md-4">
+           <label>Postcode</label> 
+           <p>{{fullDetails.postal_code}}</p>
+         </div>
+
+         <div class="col-md-4">
+            <label>Installation Address</label> 
+            <p>{{fullDetails.address}}</p>
+          </div>
+
+          <div class="col-md-4">
+            <label>Price</label> 
+            <p> £{{fullDetails.boiler_price}}</p>
+          </div>
+   </div>
+   <div class="row">
+      
+      <div class="col-md-4">
+        <label>  Control Name</label> 
+        <p>{{fullDetails.controls.name}}</p>
+      </div>
+
+      <div class="col-md-4">
+         <label>Control Price</label> 
+         <p> £{{fullDetails.controls.price}}</p>
+       </div>
+
+       <div class="col-md-4">
+         <label>Total Price</label> 
+         <p><b> £{{fullDetails.price}}</b></p>
+       </div>
+</div>
+
+
+       </div>
+    </div>
+ </ng-template>
+
+ <ng-template #templatechangeStatus>
+   <div class="modal-header">
+      <h4 class="modal-title pull-left">Payment Confirmation</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRefStatus.hide()">
+      <span aria-hidden="true">&times;</span>
+      </button>
+   </div>
+   <div class="modal-body">
+      <p>Are you sure you want to paid for this booking?</p>
+      <button _ngcontent-c4="" class="btn btn-blue" style="color: white;" type="button" (click) = "confirmChangeStatus()">Yes</button>
+      <button _ngcontent-c4="" class="btn btn-danger" style="margin-left:10px" type="button" (click)="modalRefStatus.hide()">No</button>
+   </div>
+</ng-template>
+
+
+
+<ng-template #editBooking>
+   <div class="modal-header">
+      <h4 class="modal-title pull-left">Set Limit</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click) = "modalRefBooking.hide()">
+      <span aria-hidden="true">&times;</span>
+      </button>
+   </div>
+   <div class="modal-body custom-class">
+      <div class="col-md-4">
+         <div class="btn-group">
+           <div
+             class="btn btn-primary"
+             mwlCalendarPreviousView
+             [view]="view1"
+             [(viewDate)]="viewDate1"
+             (viewDateChange)="closeOpenMonthViewDay()"
+           >
+             Previous
+           </div>
+           <div
+             class="btn btn-outline-secondary"
+             mwlCalendarToday
+             [(viewDate)]="viewDate1"
+           >
+             Today
+           </div>
+           <div
+             class="btn btn-primary"
+             mwlCalendarNextView
+             [view]="view1"
+             [(viewDate)]="viewDate1"
+             (viewDateChange)="closeOpenMonthViewDay()"
+           >
+             Next
+           </div>
+         </div>
+       </div>
+       <div class="col-md-8" style="margin-top: 13px;">
+         <h3>{{ viewDate1 | calendarDate:(view1 + 'ViewTitle'):'en' }}</h3>
+       </div>
+      <div class="row">
+         <div class="col-md-12">
+            <mwl-calendar-day-view
+            [events]="events"
+            [viewDate]="viewDate1"
+            [refresh]="refresh" 
+            [dayStartHour]="9"
+            (beforeViewRender)="beforeWeekOrDayViewRender($event)"
+            [dayEndHour]="20"
+            
+            (hourSegmentClicked)="hoursClick($event.date)"
+            
+          > </mwl-calendar-day-view>
+         </div>
+         
+      </div>
+
+      <div class="row">
+ 
+          <div class="col-md-6">
+              <label> Limit</label>
+              <input type="text"  [(ngModel)] = "limitBooking" class="form-control">
+          </div>
+      </div>
+
+
+
+<div>
+    
+  <button style="width: 113px;" (click) = "updateBooking()" class="btn mt-3 btn-block btn-outline-primary active btn-blue">Submit</button>
+</div>
+   </div>
+</ng-template>
+
+
+
+<ng-template #editLimit>
+    <div class="modal-header">
+       <h4 class="modal-title pull-left">Update Limit</h4>
+       <button type="button" class="close pull-right" aria-label="Close" (click) = "modalRefLimit.hide()">
+       <span aria-hidden="true">&times;</span>
+       </button>
+    </div>
+    <div class="modal-body custom-class">
+      <div class="col-md-8" style="margin-top: 13px;">
+         <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+       </div>
+       <div class="row">
+          <div class="col-md-12">
+            <mwl-calendar-day-view
+            [events]="events"
+            [viewDate]="viewDate"
+            (beforeViewRender)="beforeWeekOrDayViewRender($event)"
+            [refresh]="refresh" 
+            [dayStartHour]="9"
+            [dayEndHour]="20"
+            
+            (hourSegmentClicked)="hoursClick($event.date)"
+            
+          > </mwl-calendar-day-view>
+          </div>
+          
+       </div>
+ 
+       <div class="row">
+ 
+           <div class="col-md-6">
+               <label> Available Slots</label>
+               <input type="text"  [(ngModel)] = "limitBooking" class="form-control">
+           </div>
+       </div>
+ 
+ 
+ 
+ <div>
+     
+   <button style="width: 113px;" (click) = "updateLimit()" class="btn mt-3 btn-block btn-outline-primary active btn-blue">Update</button>
+ </div>
+    </div>
+ </ng-template>
+
+
+
+
+ <ng-template #viewAll>
+    <div class="modal-header">
+       <h4 class="modal-title pull-left">View Calendar</h4>
+       <button type="button" class="close pull-right" aria-label="Close" (click) = "modalRefAll.hide()">
+       <span aria-hidden="true">&times;</span>
+       </button>
+    </div>
+    <div class="modal-body custom-class">
+      <div class="col-md-4">
+         <div class="btn-group">
+           <div
+             class="btn btn-primary"
+             mwlCalendarPreviousView
+             [view]="view2"
+             [(viewDate)]="viewDate2"
+             (viewDateChange)="closeOpenMonthViewDay()"
+           >
+             Previous
+           </div>
+           <div
+             class="btn btn-outline-secondary"
+             mwlCalendarToday
+             [(viewDate)]="viewDate2"
+           >
+             Today
+           </div>
+           <div
+             class="btn btn-primary"
+             mwlCalendarNextView
+             [view]="view2"
+             [(viewDate)]="viewDate2"
+             (viewDateChange)="closeOpenMonthViewDay()"
+           >
+             Next
+           </div>
+         </div>
+       </div>
+       <div class="col-md-8" style="margin-top: 13px;">
+         <h3>{{ viewDate2 | calendarDate:(view2 + 'ViewTitle'):'en' }}</h3>
+       </div>
+       <div class="row">
+          <div class="col-md-12">
+            <mwl-calendar-week-view
+            [events]="events"
+            [viewDate]="viewDate2"
+            (beforeViewRender)="beforeWeekOrDayViewRender($event)"
+            [refresh]="refresh" 
+            [dayStartHour]="9"
+            [dayEndHour]="20"
+           
+            (hourSegmentClicked)="hoursClick($event.date)"
+            
+          > </mwl-calendar-week-view>
+          </div>
+          
+       </div>
+
+
+    </div>
+ </ng-template>
+
+
+
+ 
+<ng-template #default>
+   <div class="modal-header">
+      <h4 class="modal-title pull-left">Default Limit</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click) = "modalRefDefault.hide()">
+      <span aria-hidden="true">&times;</span>
+      </button>
+   </div>
+   <div class="modal-body">
+
+
+      <div class="row">
+
+          <div class="col-md-6">
+              <label> Default Limit</label>
+              <input type="text"  [(ngModel)] = "defaultLimitData" class="form-control">
+          </div>
+      </div>
+
+
+
+<div>
+    
+  <button style="width: 113px;" (click) = "updateDefaultLimit()" class="btn mt-3 btn-block btn-outline-primary active btn-blue">Update</button>
+</div>
+   </div>
+</ng-template>

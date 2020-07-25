@@ -1,0 +1,188 @@
+<div class="container-fluid">
+    <div id="ui-view">
+       <div>
+          <div class="animated fadeIn">
+             <div class="card">
+                <div class="card-header">
+                   <i class="fa fa-edit"></i> Makes
+                   <div class="card-header-actions">
+                   </div>
+                </div>
+                <div class="card-body">
+                   <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                      <div class="row">
+                         <div class="col-sm-12 col-md-6">
+                            <div class="dataTables_length" id="DataTables_Table_0_length">
+                               <label>
+                                  Show 
+                                  <select name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" [(ngModel)]="perPage" class="custom-select custom-select-sm form-control form-control-sm">
+                                  <option value="10">10</option>
+                                  <option value="25">25</option>
+                                  <option value="50">50</option>
+                                  <option value="100">100</option>
+                                  </select>
+                                  entries
+                               </label>
+                            </div>
+                         </div>
+                         <div class="col-sm-12 col-md-6">
+                            <div id="DataTables_Table_0_filter" class="dataTables_filter searchBar"><label>Search:<input type="search" [(ngModel)]="searchText" class="form-control form-control-sm" placeholder="" aria-controls="DataTables_Table_0"></label></div>
+                         </div>
+                      </div>
+                      <div>
+                         <button _ngcontent-c4="" (click)="addUser(addUserPop);"aria-pressed="true" class="btn btn-block btn-outline-primary active btn-blue" type="button" style="
+                         width: 111px;
+                         margin: 0 0 17px 0;
+                         ">Add Make</button>
+                      </div>
+                      <div class="row">
+                         <div class="col-sm-12">
+                            <table class="table table-striped table-bordered datatable dataTable no-footer  table-responsive-sm table-bordered table-striped table-sm" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info" style="border-collapse: collapse !important">
+                               <thead>
+                                  <tr role="row">
+                                     <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Username: activate to sort column descending" style="width: 150px;">#</th>
+                                     <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Username: activate to sort column descending" style="width: 281px;">Name</th>
+                                     <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Username: activate to sort column descending" style="width: 281px;">Type</th>
+                                     <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Actions: activate to sort column ascending" style="width: 391.2px;">Actions</th>
+                                  </tr>
+                               </thead>
+                               <tbody>
+                                  <tr role="row" class="odd" *ngFor="let users of listUsers| filter:searchText| paginate: { itemsPerPage: perPage, currentPage: p } index as i">
+                                     <td class="sorting_1 wordBreak">{{i+1}}</td>
+                                     <td class="sorting_1 wordBreak">{{users.make}}</td>
+                                     <td class="sorting_1 wordBreak">{{users.type}}</td>
+                                     <td>
+                              
+                                        <a class="btn btn-info" style="margin-right: 10px;" (click)="updateUser(updateUserPop,users)">
+                                        <i class="fa fa-edit"></i>
+                                        </a>
+                                        <a class="btn btn-danger" (click) = "deleteUser(templateDelete,users.id)">
+                                        <i class="fa fa-trash-o"></i>
+                                        </a>
+                                     </td>
+                                  </tr>
+                               </tbody>
+                            </table>
+                         </div>
+                      </div>
+                      <div class="row">
+                         <div class="col-sm-12 col-md-5">
+                            <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">{{perPage}} of {{totalEntries}} entries</div>
+                         </div>
+                         <div class="col-sm-12 col-md-7">
+                            <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
+                               <ul class="pagination">
+                                  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                               </ul>
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+
+ <ng-template #addUserPop>
+    <div class="modal-header">
+       <h4 class="modal-title pull-left">Add Make</h4>
+       <button type="button" class="close pull-right" aria-label="Close" (click)="cancelAddUser()">
+       <span aria-hidden="true">&times;</span>
+       </button>
+    </div>
+    <div class="modal-body">
+       <div class="row">
+          <div class="col-md-12">
+             <div >
+                <form class="signup"  [formGroup]="signupForm" (ngSubmit)="signup()">
+                <div class="row">
+                   <div class="col-md-6">
+                      <div class="form-group"> 
+                         <label for="email_id" class="control-label"> Select Type</label>
+                         <select name="countries"  [(ngModel)]="signupData.type" [ngClass]="{ 'is-invalid': submitted && f.type.errors }"  class="custom-select"  formControlName="type">
+                            <option value=""> Please select</option>    
+                            <option value="car"> Car</option>    
+                            <option value="bike"> Bike</option>                  
+                        </select>
+                         
+                      </div>
+                   </div>
+                   <div class="col-md-6">
+                    <div class="col-md-6">
+                        <div class="form-group"> 
+                           <label for="email_id" class="control-label">Make</label>
+                           <input type="text" [(ngModel)]="signupData.make"   [ngClass]="{ 'is-invalid': submitted && f.make.errors }" formControlName="make" class="form-control" id="email_id" name="email_name" placeholder="Make">
+                        </div>
+                     </div>
+                   </div>
+                </div>
+
+                <div class="form-group">
+                   <!-- Submit button !-->
+                   <button  class="btn btn-secondary btn-blue" style="color:white">Submit</button>
+                </div>
+                </form>
+             </div>
+          </div>
+       </div>
+    </div>
+ </ng-template>
+ <ng-template #updateUserPop>
+    <div class="modal-header">
+       <h4 class="modal-title pull-left">Update Make</h4>
+       <button type="button" class="close pull-right" aria-label="Close" (click)="modalRefUpdate.hide()">
+       <span aria-hidden="true">&times;</span>
+       </button>
+    </div>
+    <div class="modal-body">
+       <div class="row">
+          <div class="col-md-12">
+             <div >
+                <form class="signup"  [formGroup]="updateInfo" (ngSubmit)="update()">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group"> 
+                           <label for="email_id" class="control-label"> Select Type</label>
+                           <select name="countries"  [(ngModel)]="infos.type" [ngClass]="{ 'is-invalid': submitted && upateF.type.errors }"  class="custom-select"  formControlName="type">
+                              <option value=""> Please select</option>    
+                              <option value="car"> Car</option>    
+                              <option value="bike"> Bike</option>                  
+                          </select>
+                           
+                        </div>
+                     </div>
+                     <div class="col-md-6">
+                        <div class="form-group"> 
+                           <label for="email_id" class="control-label">Make</label>
+                           <input type="text" [(ngModel)]="infos.make"   [ngClass]="{ 'is-invalid': submitted && upateF.make.errors }" formControlName="make" class="form-control" id="email_id" name="email_name" placeholder="Make">
+                        </div>
+                     </div>
+                </div>
+  
+            
+                <div class="form-group">
+                   <!-- Submit button !-->
+                   <button  class="btn btn-secondary btn-blue"style="color:white">Submit</button>
+                </div>
+                </form>
+             </div>
+          </div>
+       </div>
+    </div>
+ </ng-template>
+ <ng-template #templateDelete>
+    <div class="modal-header">
+       <h4 class="modal-title pull-left">Delete Make</h4>
+       <button type="button" class="close pull-right" aria-label="Close" (click)="modalRefDel.hide()">
+       <span aria-hidden="true">&times;</span>
+       </button>
+    </div>
+    <div class="modal-body">
+       <p>Are you sure you want to delete this make?</p>
+       <button _ngcontent-c4="" class="btn btn-blue" style="color: white;"  type="button" (click) = "confirmDelete()">Yes</button>
+       <button _ngcontent-c4="" class="btn btn-danger" style="margin-left:10px" type="button" (click)="modalRefDel.hide()">No</button>
+    </div>
+ </ng-template>
+ 

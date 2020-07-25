@@ -1,0 +1,79 @@
+<div class="container-fluid" style="padding: 0px">
+    <div id="ui-view">
+       <div>
+          <div class="animated fadeIn">
+             <div class="card">
+                <div class="card-header">
+                   <i class="fa fa-edit"></i> CMS
+                 
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+<div class="modal-body" style="padding:27px">
+      <div class="row">
+         <div class="col-md-12">
+            
+               <form class="signup" [formGroup]="contentForm"  (ngSubmit)="save()">
+                <!-- <div class="row">
+                 
+                 </div> -->
+        
+               <div class="row">
+           
+                  <div class="col-md-6">
+                    <div class="form-group" > 
+                       <label for="email_id" class="control-label"> Phone</label>
+                       <input type="text" [(ngModel)]="custom.phone"    formControlName="phone" class="form-control" id="email_id" name="email_name" 
+                       >
+                    </div>
+                 </div>
+
+                 <div class="col-md-6">
+                  <div class="form-group" > 
+                     <label for="email_id" class="control-label"> Installation Date text</label>
+                     <angular-editor [placeholder]="'Enter text here...'" [(ngModel)]="custom.installationText"formControlName="installationText"></angular-editor>
+                     <!-- <angular-editor  [(ngModel)]="custom.installationText"></angular-editor> -->
+                     <!-- <textarea type="text" [(ngModel)]="custom.installationText"    formControlName="installationText" class="form-control" id="email_id" name="email_name" 
+                     ></textarea> -->
+                  </div>
+               </div>
+             
+               </div>
+               
+               <div class="row">
+           
+                  
+
+                 <div class="col-md-6">
+                  <div class="form-group" > 
+                     <label for="email_id" class="control-label"> Payment Text</label>
+                     <textarea type="text" [(ngModel)]="custom.paymentText"    formControlName="paymentText" class="form-control" id="email_id" name="email_name" 
+                     ></textarea>
+                  </div>
+               </div>
+
+               <div class="col-md-6">
+                  <div class="form-group" > 
+                     <label for="email_id" class="control-label"> Video Text</label>
+                     <textarea type="text" [(ngModel)]="custom.videoText"    formControlName="videoText" class="form-control" id="email_id" name="email_name" 
+                     ></textarea>
+                  </div>
+               </div>
+             
+               </div>
+              
+
+            <div>
+
+      </div>
+               <div class="form-group">
+                  <!-- Submit button !-->
+                  <button  class="btn btn-secondary btn-blue" style="color:white">Submit</button>
+               </div>
+               </form>
+            </div>
+         </div>
+      </div>

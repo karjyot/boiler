@@ -1,0 +1,60 @@
+<div class="thank-you-pg">
+    <div class="container">
+        <h3 class="text-center d-block">Below is your booking detail!</h3>
+        <div class="order-details">
+        <div class="row align-items-center" *ngIf="finalObj" style="    border-bottom: 1px solid #cccc;
+        padding-bottom: 11px;">            
+            
+                <div class="col-sm-3">
+                    <img src="{{finalObj.product.image}}" class="img-fluid">
+                </div>
+                <div class="col-sm-6">
+                    <div class="order-text">
+                        <h4>{{finalObj.product.boiler_name}}</h4>
+                        <h5>{{finalObj.product.title}}</h5>
+                        <div class="inst-date"><b>Installation Date:</b> {{finalObj.installationDate | date}}</div>
+                        <div class="vid-date"><b>Video Date:</b> {{finalObj.videoDate | date:'short'}}</div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="tot-price"><b>Price</b> <h5> £{{finalObj.product.price}}</h5></div>
+                </div>
+            </div>   
+            
+            <div class="row align-items-center" *ngIf="ctrlObj" style="    padding-top: 10px;
+            padding-bottom: 10px;    border-bottom: 1px solid #ccc;">            
+            
+                <div class="col-sm-3">
+                    <img src="{{ctrlObj.image}}" class="img-fluid">
+                </div>
+                <div class="col-sm-6">
+                    <div class="order-text">
+                        <h4>{{ctrlObj.name}}</h4>
+                        <h5>{{ctrlObj.title}}</h5>
+                        
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="tot-price"><b>Price</b> <h5> £{{ctrlObj.price}}</h5></div>
+                </div>
+            </div>  
+            
+            <div class="row align-items-center" *ngIf="ctrlObj" style="padding-top: 10px;">            
+            
+    
+                <div class="col-sm-6">
+                    <div class="order-text">
+                        <h4>Total</h4>
+                       
+                        
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="tot-price" style="float:right;padding-right: 159px;"><b>Total Price</b> <h5> £{{finalObj.finalPrice}}</h5></div>
+                </div>
+            </div>
+        </div>
+        <h4 class="text-center d-block">Thank you for your order! your request has been submitted.
+            <br> We will contact you soon.</h4>
+    </div>
+</div>

@@ -1,0 +1,78 @@
+<div class="container-fluid">
+    <div id="ui-view">
+       <div>
+          <div class="animated fadeIn">
+             <div class="card">
+                <div class="card-header">
+                   <i class="fa fa-edit"></i> Payments
+                   <div class="card-header-actions">
+                   </div>
+                </div>
+                <div class="card-body">
+                   <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                      <div class="row">
+                         <div class="col-sm-12 col-md-6">
+                            <div class="dataTables_length" id="DataTables_Table_0_length">
+                               <label>
+                                  Show 
+                                  <select name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" [(ngModel)]="perPage" class="custom-select custom-select-sm form-control form-control-sm">
+                                  <option value="10">10</option>
+                                  <option value="25">25</option>
+                                  <option value="50">50</option>
+                                  <option value="100">100</option>
+                                  </select>
+                                  entries
+                               </label>
+                            </div>
+                         </div>
+                         <div class="col-sm-12 col-md-6">
+                            <div id="DataTables_Table_0_filter" class="dataTables_filter searchBar"><label>Search:<input type="search" [(ngModel)]="searchText" class="form-control form-control-sm" placeholder="" aria-controls="DataTables_Table_0"></label></div>
+                         </div>
+                      </div>
+         
+                      <div class="row">
+                         <div class="col-sm-12">
+                            <table class="table table-striped table-bordered datatable dataTable no-footer  table-responsive-sm table-bordered table-striped table-sm" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info" style="border-collapse: collapse !important">
+                               <thead>
+                                  <tr role="row">
+                                     <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Username: activate to sort column descending" style="width: 150px;">#</th>
+                                     <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Username: activate to sort column descending" style="width: 281px;">Name</th>
+                                     <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Username: activate to sort column descending" style="width: 281px;">Email</th>
+                                     <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Date registered: activate to sort column ascending" style="width: 140.2px;">Amount Paid</th>
+                                     <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Date registered: activate to sort column ascending" style="width: 140.2px;">Date</th>
+                                  </tr>
+                               </thead>
+                               <tbody>
+                                  <tr role="row" class="odd" *ngFor="let users of listUsers| filter:searchText| paginate: { itemsPerPage: perPage, currentPage: p } index as i">
+                                     <td class="sorting_1 wordBreak">{{i+1}}</td>
+                                     <td class="sorting_1 wordBreak">{{users.name}}</td>
+                                     <td class="sorting_1 wordBreak">{{users.email}}</td>
+                                     <td class="sorting_1 wordBreak">£{{users.amount}}</td>
+                                     <td class="sorting_1 wordBreak">{{users.created_at}}</td>
+
+                                  </tr>
+                               </tbody>
+                            </table>
+                         </div>
+                      </div>
+                      <div class="row">
+                         <div class="col-sm-12 col-md-5">
+                            <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">{{perPage}} of {{totalEntries}} entries</div>
+                         </div>
+                         <div class="col-sm-12 col-md-7">
+                            <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
+                               <ul class="pagination">
+                                  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                               </ul>
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+
+

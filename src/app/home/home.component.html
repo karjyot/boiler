@@ -1,0 +1,78 @@
+
+<div class="q-a-box">
+  
+    <div class="order-section order-step-{{i+1}} " [ngClass]="{'active-section': i === 0}" *ngFor="let data of questions; let i = index">
+        <div class="container" id="box-1">
+            <div class="body-text text-center">
+              <h5><span><i class="fa fa-search"></i></span>{{data.name}}</h5>
+            </div>
+        </div>     
+          
+          <div class="answer-box-section" [ngClass]="{'number-divider': i === 5 || i === 6 || i === 7 }">
+            <div class="container">
+              <div class="row">   
+                         
+                <div class="col-md-3 col-sm-12 col-xs-12" (click) = "orderDetails($event,cat.category,cat,i+1)"  *ngFor="let cat of data.categories">
+                  <div class="answer-box" [ngClass]="{'answer-number':  i == 5 || i === 6 || i === 7 }">
+                    <div class="answer-img" *ngIf="cat.image">
+                      <img src="{{cat.image}}">
+                    </div>
+                    <div class="answer-body">
+                      <p [ngClass]="{'number': i === 5 || i === 6 || i === 7 }">{{cat.category}}</p>
+                    </div>
+                  </div>
+              </div>
+    
+            </div>   
+          </div> 
+          <a href="javascript:;" class="btn-back" *ngIf="i != 0" (click)="back($event)"><i class="fa fa-angle-left" aria-hidden="true"></i></a>    
+        </div>
+            
+ 
+    </div>
+    <div class="order-section order-step-10">
+      <!-- <div class="container" id="box-1">
+          <div class="body-text text-center">
+            <p>What type of property do you have 5</p>
+          </div>
+      </div>      -->
+        
+        <div class="answer-box-section">
+          <div class="container">
+            <div class="row">            
+  
+      
+            
+      
+        <div class="container">
+                <div class="body-text text-center">
+                  <h5><span><i class="fa fa-search"></i></span>Where in the UK are you?</h5>
+                  <h6 class="text-center">Please enter the first part of your postcode</h6>
+                </div>
+            </div>
+            <div class="col-sm-7">
+            <form class="form-inline direct" action="">
+              <input type="text" class="form-control mb-2 mr-sm-2" [(ngModel)] = "postalCode" [ngModelOptions]="{standalone: true}" placeholder="e.g. AB12, G11, EH12 etc." id="pwd">
+              <button type="button" (click) = "next()" class="btn btn-primary mb-2">Next<i class="fa fa-arrow-right" aria-hidden="true"></i>
+              </button>
+            </form> 
+          </div>
+          </div>  
+      
+        </div>   
+      </div>
+  
+  
+  
+  
+      <a href="javascript:;" class="btn-back" (click)="back($event)"><i class="fa fa-angle-left" aria-hidden="true"></i>
+          </a>
+      </div>
+
+    
+    </div>
+    
+
+  <!-- Footer -->
+
+<!-- Footer -->

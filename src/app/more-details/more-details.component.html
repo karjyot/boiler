@@ -1,0 +1,137 @@
+<!-- <div class="top-content more-details">
+  <div class="container">
+    <a _ngcontent-mix-c282="" href="javascript:;" (click) = "back()" class="more-det-btn"><i _ngcontent-mix-c282="" aria-hidden="true" class="fa fa-angle-left"></i> Back</a>
+  </div>
+</div> -->
+<div class="more-details-div">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xs-12 col-lg-12">
+                <div class="row justify-content-center">    
+                    <div class="col-xs-12 col-sm-12 col-lg-3 hp-boiler lg det-mr-img mt-15-l">
+                        <img src="{{listProducts.image}}" class="img-fluid">
+                        
+    
+                    </div>
+
+                    <div class="col-xs-12 col-sm-12 col-lg-5">    
+                        <div _ngcontent-wgl-c34="" class="boil-content">
+                            <h2 _ngcontent-wgl-c34=""  *ngIf="listProducts">{{listProducts.boiler_name}}</h2>
+                            <h4 _ngcontent-wgl-c34="" class="red"  *ngIf="listProducts">{{listProducts.title}}</h4>
+                            <ul _ngcontent-wgl-c34="" class="boiler-list">
+                              <li *ngIf="listProducts.feature1">{{listProducts.feature1}}</li>
+                              <li *ngIf="listProducts.feature2">{{listProducts.feature2}}</li>
+                              <li *ngIf="listProducts.feature3">{{listProducts.feature3}}</li>
+                              <li *ngIf="listProducts.feature4">{{listProducts.feature4}}</li>
+                              <li *ngIf="listProducts.feature5">{{listProducts.feature5}}</li>
+                              <li *ngIf="listProducts.feature6">{{listProducts.feature6}}</li>
+                              <li *ngIf="listProducts.feature7">{{listProducts.feature7}}</li>
+                              <li *ngIf="listProducts.feature8">{{listProducts.feature8}}</li>
+                            </ul>
+                        </div>
+                     </div>
+                     <div class="col-xs-12 col-sm-12 col-lg-4"> 
+                      <div _ngcontent-ypq-c283="" class="price-box text-center"><h4 _ngcontent-ypq-c283="">Your fixed install price</h4><div _ngcontent-ypq-c283="" class="price-title">£{{listProducts.price}}</div><button (click) = "selectBoiler()" type="button" class="primary red-bg" style="cursor: pointer;"><span _ngcontent-ypq-c283=""><i _ngcontent-ypq-c283="" class="fa fa-calendar"></i></span> Select this boiler</button></div>
+                     </div>
+    
+                </div>
+            </div>
+        </div>
+    </div>
+    <a _ngcontent-mix-c282="" href="javascript:;" (click) = "back()" class="btn-back"><i _ngcontent-mix-c282="" aria-hidden="true" class="fa fa-angle-left"></i> </a>
+</div>
+
+<div class="more-det-about">
+    <div class="container">
+        <h2 class="main-title text-center">About your boiler</h2>
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-sm-12 col-md-12">
+                <div class="det-abt-sec">
+                    <p>
+                      {{listProducts.about}}
+                    <p>
+                </div>                
+            </div>
+        </div>
+    </div>
+</div>
+
+<!---------------- FAQ Section -------------->
+<!-- <section class="faq-section">
+    <div class="container">
+
+            <div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
+
+                    <div class="card">
+
+                            <div class="card-header" role="tab" id="headingOne1">
+                                    <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne1" aria-expanded="true"
+                                aria-controls="collapseOne1">
+                                    <h5 class="mb-0">
+                                  Lorem ipsum dolor sit amet, consectetur adipisicing elit? <i class="fa fa-angle-down rotate-icon"></i>
+                                    </h5>
+                                </a>
+                            </div>
+                   
+                            <div id="collapseOne1" class="collapse" role="tabpanel" aria-labelledby="headingOne1"
+                            data-parent="#accordionEx">
+                                <div class="card-body">
+                                Lorem ipsum dolor sit amet. 
+                                </div>
+                            </div>
+                        </div>
+           
+
+       
+                          <div class="card">
+
+         
+                            <div class="card-header" role="tab" id="headingTwo2">
+                              <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapseTwo2"
+                                aria-expanded="false" aria-controls="collapseTwo2">
+                                <h5 class="mb-0">
+                                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod?<i class="fa fa-angle-down rotate-icon"></i>
+                                </h5>
+                              </a>
+                            </div>
+
+             
+                            <div id="collapseTwo2" class="collapse" role="tabpanel" aria-labelledby="headingTwo2"
+                              data-parent="#accordionEx">
+                              <div class="card-body">
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3
+                                wolf moon officia aute, non cupidatat skateboard dolor brunch.
+                              </div>
+                            </div>
+
+                          </div>
+                 
+
+                     
+                              <div class="card">
+
+         
+                                <div class="card-header" role="tab" id="headingThree3">
+                                  <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapseThree3"
+                                    aria-expanded="false" aria-controls="collapseThree3">
+                                    <h5 class="mb-0">
+                                      Lorem ipsum dolor sit amet, consectetur elit? <i class="fa fa-angle-down rotate-icon"></i>
+                                    </h5>
+                                  </a>
+                                </div>
+
+
+                                <div id="collapseThree3" class="collapse" role="tabpanel" aria-labelledby="headingThree3"
+                                  data-parent="#accordionEx">
+                                  <div class="card-body">
+                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 
+                                  </div>
+                                </div>
+
+                              </div>
+           
+
+                            </div>
+     
+    </div>
+</section> -->

@@ -1,0 +1,108 @@
+<header class="app-header navbar">
+  <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" style="color:white" type="button" (click) = "sidebarToggle()">
+    <span class="navbar-toggler-icon"  ></span>
+  </button>
+  <a class="navbar-brand" routerLink="admin/dashboard">
+    <!-- <p>CatchService</p> -->
+    <h1 _ngcontent-dtx-c3="" class="text-light" style="    text-align: center;"><a _ngcontent-dtx-c3="" routerlink="/admin/dashboard" ng-reflect-router-link="/" href="/" style="font-size: 21px;"><img  style="width: 75%;"src="assets/images/logo.png"></a></h1>
+  </a>
+  <button class="navbar-toggler sidebar-toggler d-md-down-none" (click) = "sidebarToggle()" type="button" data-toggle="sidebar-lg-show">
+    <span class="navbar-toggler-icon" style="color: white;background-color: white;"></span>
+  </button>
+ 
+  <ul class="nav navbar-nav ml-auto">
+      <ul class="nav navbar-nav d-md-down-none">
+          <li class="nav-item px-3"><a class="nav-link" (click)="settings(updateUserPop)"  style="cursor:pointer;" >Settings</a></li>
+          <li class="nav-item px-3"><a class="nav-link" style="cursor:pointer;" (click)="logout()">Logout</a></li>
+      
+       </ul>
+    
+    <li class="nav-item dropdown">
+        <div class="dropdown-menu dropdown-menu-right" style="    position: absolute;
+        top: 100% !important;
+      
+        left: -129px !important;">
+           
+         
+          <div class="dropdown-header text-center">
+              <strong>Settings</strong>
+            </div>
+            
+            <a class="dropdown-item"  (click)="settings(updateUserPop)">
+              <i class="fa fa-wrench"></i>Update Profile</a> 
+           
+            <a class="dropdown-item" (click)="logout()">
+              <i class="fa fa-lock"></i> Logout</a>
+          </div>
+      <a class="nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+        <img class="img-avatar" style="
+        object-fit: cover;" *ngIf = "adminDetails" src="{{adminDetails.image}}">
+        <img class="img-avatar" style=" 
+        object-fit: cover;"  *ngIf = "!adminDetails"  src="./assets/images/deault.png">
+      </a>
+     
+    </li>
+  </ul>
+  
+</header>
+
+
+
+
+<ng-template #updateUserPop>
+            <div class="modal-header">
+                  <h4 class="modal-title pull-left">Update Details</h4>
+              <button type="button" class="close pull-right" aria-label="Close" (click)="modalRefUpdate.hide()">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+               
+                  <div class="row">
+                        <div class="col-md-12">
+                                <div >
+                                   
+                                   <form class="signup"  [formGroup]="updateInfo" (ngSubmit)="update()">
+        
+                    
+                                   <div class="row">
+                                         <div class="col-md-6">
+                                         <div class="form-group"> 
+                                             
+                                               <label for="email_id" class="control-label">Password</label>
+                                               <input type="password" [(ngModel)]="infos.phone"   [ngClass]="{ 'is-invalid': submitted && upateF.phone.errors }" formControlName="phone" class="form-control" id="email_id" name="email_name" placeholder="Password">
+                                            
+                                         </div>
+                                      </div>
+                    
+                                      <div class="col-md-6">
+                                      
+                                         <div class="form-group"> 
+                                            
+                                               <label for="email_id" class="control-label">Email</label>
+                                               <input type="email" class="form-control"[(ngModel)]="infos.email"   [ngClass]="{ 'is-invalid': submitted && upateF.email.errors }" formControlName="email" id="email_id" name="email_name" placeholder="name@domain.com">
+                                            
+                                         </div>
+                                      
+                                      </div>
+                                   </div>
+                    
+                    
+                    
+                                   
+                                   <div class="form-group"> <!-- Submit button !-->
+                                      <button  class="btn btn-secondary"style="background:#4362a7;color:white">Submit</button>
+                                   </div>	
+                                </form>
+                    
+                    
+                    
+                    
+                                </div>
+                            </div>
+                        </div>
+                    
+     
+           
+            </div>
+          </ng-template> 

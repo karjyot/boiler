@@ -1,0 +1,459 @@
+<div class="container-fluid">
+    <div id="ui-view">
+       <div>
+          <div class="animated fadeIn">
+             <div class="card">
+                <div class="card-header">
+                   <i class="fa fa-edit"></i> Products
+                   <div class="card-header-actions">
+                   </div>
+                </div>
+                <div class="card-body">
+                   <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                      <div class="row">
+                         <div class="col-sm-12 col-md-6">
+                            <div class="dataTables_length" id="DataTables_Table_0_length">
+                               <label>
+                                  Show 
+                                  <select name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" [(ngModel)]="perPage" class="custom-select custom-select-sm form-control form-control-sm">
+                                  <option value="10">10</option>
+                                  <option value="25">25</option>
+                                  <option value="50">50</option>
+                                  <option value="100">100</option>
+                                  </select>
+                                  entries
+                               </label>
+                            </div>
+                         </div>
+                         <div class="col-sm-12 col-md-6">
+                            <div id="DataTables_Table_0_filter" class="dataTables_filter searchBar"><label>Search:<input type="search" [(ngModel)]="searchText" class="form-control form-control-sm" placeholder="" aria-controls="DataTables_Table_0"></label></div>
+                         </div>
+                      </div>
+                      <div>
+                         <button _ngcontent-c4="" (click)="addUser(addUserPop);"aria-pressed="true" class="btn btn-block btn-outline-primary active btn-blue" type="button" style="
+                         width: 111px;
+                         margin: 0 0 17px 0;
+                         " *ngIf="details && details.type != 'admin'">Add Product</button>
+                      </div>
+                      <div class="row">
+                         <div class="col-sm-12">
+                            <table class="table table-striped table-bordered datatable dataTable no-footer  table-responsive-sm table-bordered table-striped table-sm" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info" style="border-collapse: collapse !important">
+                               <thead>
+                                  <tr role="row">
+                                     <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Username: activate to sort column descending" style="width: 150px;">#</th>
+                                     <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Username: activate to sort column descending" style="width: 281px;">Boiler Name</th>
+                                
+                                     <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Username: activate to sort column descending" style="width: 281px;">Boiler Price</th>
+                                     <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Username: activate to sort column descending" style="width: 281px;">Type</th>
+                                     <th *ngIf="details && details.type != 'admin'" class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Actions: activate to sort column ascending" style="width: 391.2px;">Actions</th>
+                                  </tr>
+                               </thead>
+                               <tbody>
+                                  <tr role="row" class="odd" *ngFor="let data of records| filter:searchText| paginate: { itemsPerPage: perPage, currentPage: p } index as i">
+                                     <td class="sorting_1 wordBreak">{{i+1}}</td>
+                                     <td class="sorting_1 wordBreak">{{data.boiler_name}}</td>
+                                     <td>{{data.boiler_price}}</td>
+                                     <td>{{data.type}}</td>
+                                     <td *ngIf="details && details.type != 'admin'">
+                                       
+                                        <a class="btn btn-info" style="margin-right: 10px;" (click)="updateUser(updateUserPop,data)">
+                                        <i class="fa fa-edit"></i>
+                                        </a>
+                                        <a class="btn btn-danger" (click) = "deleteUser(templateDelete,data.id)">
+                                        <i class="fa fa-trash-o"></i>
+                                        </a>
+                                     </td>
+                                  </tr>
+                               </tbody>
+                            </table>
+                         </div>
+                      </div>
+                      <div class="row">
+                         <div class="col-sm-12 col-md-5">
+                            <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">{{perPage}} of {{totalEntries}} entries</div>
+                         </div>
+                         <div class="col-sm-12 col-md-7">
+                            <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
+                               <ul class="pagination">
+                                  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                               </ul>
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+
+ <ng-template #addUserPop>
+    <div class="modal-header">
+       <h4 class="modal-title pull-left">Add Boiler</h4>
+       <button type="button" class="close pull-right" aria-label="Close" (click)="cancelAddUser()">
+       <span aria-hidden="true">&times;</span>
+       </button>
+    </div>
+    <div class="modal-body">
+       <div class="row">
+      
+
+          <div class="col-md-12">
+             <div >
+                <form class="signup"  [formGroup]="signupForm" (ngSubmit)="signup()">
+                    <div class="row">
+                        <div class="col-md-6">
+       
+                            <div class="form-group"> 
+                                   
+                                <img  [src]="urls" style="width:100px">
+                                <a *ngIf="urls" style="width:100px" (click)="removeImg(urls)" class="card-link image-delete"><i class="fa fa-trash" style="position: absolute;color:red">
+                                 
+                                    </i></a>
+                            </div>
+                           </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+       
+                            <div class="form-group"> 
+                              
+                                <div class="custom-file">
+                                   <input type="file" class="custom-file-input" id="customFile"  (change)="onSelectFile($event)" accept="image/*">
+                                   <label class="custom-file-label" for="customFile">Choose file</label>
+                                 </div>
+                            </div>
+                           </div>
+                    </div>
+
+                <div class="row">
+                   <div class="col-md-6">
+                      <div class="form-group" [ngClass]="{ 'error': submitted && f.name.errors }"> 
+                         <label for="email_id" class="control-label"> Boiler Name</label>
+                         <input type="text" [(ngModel)]="signupData.name"   [ngClass]="{ 'is-invalid': submitted && f.name.errors }" formControlName="name" class="form-control" id="email_id" name="email_name" placeholder="Question Name" 
+                         >
+                      </div>
+                   </div>
+                   <div class="col-md-6">
+                     <div class="form-group" [ngClass]="{ 'error': submitted && f.title.errors }"> 
+                        <label for="email_id" class="control-label"> Title</label>
+                        <input type="text" [(ngModel)]="signupData.title"   [ngClass]="{ 'is-invalid': submitted && f.title.errors }" formControlName="title" class="form-control" id="email_id" name="title" placeholder="title" 
+                        >
+                     </div>
+                   </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                       <div class="form-group" [ngClass]="{ 'error': submitted && f.price.errors }"> 
+                          <label for="email_id" class="control-label"> Boiler Price</label>
+                          <input type="text" [(ngModel)]="signupData.price"   [ngClass]="{ 'is-invalid': submitted && f.price.errors }" formControlName="price" class="form-control" id="email_id" name="email_name" placeholder="price" 
+                          >
+                       </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group"> 
+                            <label for="email_id" class="control-label"> Type</label>
+                        <select [(ngModel)]="signupData.type" class="custom-select" formControlName="type">
+                         <option value = "gas"> Gas </option> 
+                         <option value = "lpg"> LPG </option> 
+                       
+                        </select>
+                        </div>
+                       </div>
+                 </div>
+
+                 <div class="row">
+                  <div class="col-md-12">
+                     <div class="form-group" > 
+                        <label for="email_id" class="control-label"> About Product</label>
+                      
+                        <textarea style = "width: 100%;
+                        height: 163px;" [(ngModel)]="signupData.about" formControlName = "about"></textarea>
+                     </div>
+                  </div>
+             
+               </div>
+
+                 <div class="row">
+                    <div class="col-md-12">
+                       <div class="form-group" > 
+                          <label for="email_id" class="control-label"> Feature - 1</label>
+                          <input type="text" [(ngModel)]="signupData.feature1"   formControlName="feature1" class="form-control" id="email_id" name="email_name" placeholder="feature" 
+                          >
+                       </div>
+                    </div>
+               
+                 </div>
+                 <div class="row">
+                    <div class="col-md-12">
+                       <div class="form-group" > 
+                          <label for="email_id" class="control-label"> Feature - 2</label>
+                          <input type="text" [(ngModel)]="signupData.feature2"   formControlName="feature2" class="form-control" id="email_id" name="email_name" placeholder="feature" 
+                          >
+                       </div>
+                    </div>
+               
+                 </div>
+                 <div class="row">
+                    <div class="col-md-12">
+                       <div class="form-group" > 
+                          <label for="email_id" class="control-label"> Feature - 3</label>
+                          <input type="text" [(ngModel)]="signupData.feature3"   formControlName="feature3" class="form-control" id="email_id" name="email_name" placeholder="feature" 
+                          >
+                       </div>
+                    </div>
+               
+                 </div>
+                 <div class="row">
+                    <div class="col-md-12">
+                       <div class="form-group" > 
+                          <label for="email_id" class="control-label"> Feature - 4</label>
+                          <input type="text" [(ngModel)]="signupData.feature4"   formControlName="feature4" class="form-control" id="email_id" name="email_name" placeholder="feature" 
+                          >
+                       </div>
+                    </div>
+               
+                 </div>
+                 <div class="row">
+                    <div class="col-md-12">
+                       <div class="form-group" > 
+                          <label for="email_id" class="control-label"> Feature - 5</label>
+                          <input type="text" [(ngModel)]="signupData.feature5"   formControlName="feature5" class="form-control" id="email_id" name="email_name" placeholder="feature" 
+                          >
+                       </div>
+                    </div>
+               
+                 </div>
+                 <div class="row">
+                    <div class="col-md-12">
+                       <div class="form-group" > 
+                          <label for="email_id" class="control-label"> Feature - 6</label>
+                          <input type="text" [(ngModel)]="signupData.feature6"   formControlName="feature6" class="form-control" id="email_id" name="email_name" placeholder="feature" 
+                          >
+                       </div>
+                    </div>
+               
+                 </div>
+                 <div class="row">
+                    <div class="col-md-12">
+                       <div class="form-group" > 
+                          <label for="email_id" class="control-label"> Feature - 7</label>
+                          <input type="text" [(ngModel)]="signupData.feature7"   formControlName="feature7" class="form-control" id="email_id" name="email_name" placeholder="feature" 
+                          >
+                       </div>
+                    </div>
+               
+                 </div>
+                 <div class="row">
+                    <div class="col-md-12">
+                       <div class="form-group" > 
+                          <label for="email_id" class="control-label"> Feature - 8</label>
+                          <input type="text" [(ngModel)]="signupData.feature8"   formControlName="feature8" class="form-control" id="email_id" name="email_name" placeholder="feature" 
+                          >
+                       </div>
+                    </div>
+               
+                 </div>
+
+
+
+                <div class="form-group">
+                   <!-- Submit button !-->
+                   <button  class="btn btn-secondary btn-blue" style="color:white">Submit</button>
+                </div>
+                </form>
+             </div>
+          </div>
+       </div>
+    </div>
+ </ng-template>
+ <ng-template #updateUserPop>
+    <div class="modal-header">
+       <h4 class="modal-title pull-left">Update Product</h4>
+       <button type="button" class="close pull-right" aria-label="Close" (click)="modalRefUpdate.hide()">
+       <span aria-hidden="true">&times;</span>
+       </button>
+    </div>
+    <div class="modal-body">
+       <div class="row">
+          <div class="col-md-12">
+             <div >
+                <form class="signup"  [formGroup]="updateInfo" (ngSubmit)="update()">
+                  <div class="row">
+                     <div class="col-md-12">
+                         <div class="form-group"> 
+                     
+                                 
+                                  
+                                  <img *ngIf="urls" [src]="urls" style="width:100px">
+                                  <a *ngIf="urls" style="width:100px" (click)="removeImg(urls)" class="card-link image-delete"><i class="fa fa-trash" style="position: absolute;color:red">
+                                   
+                                      </i></a>
+                                
+                          </div>
+                      <div class="form-group"> 
+                         <label for="email_id" class="control-label"> Image</label>
+                          <div class="custom-file">
+                             <input type="file" class="custom-file-input" id="customFile"  (change)="onSelectFile($event)" accept="image/*">
+                             <label class="custom-file-label" for="customFile">Choose file</label>
+                           </div>
+                      </div>
+                     </div>
+                    </div>
+   
+                <div class="row">
+                   <div class="col-md-6">
+                      <div class="form-group" [ngClass]="{ 'error': submitted && upateF.name.errors }"> 
+                         <label for="email_id" class="control-label"> Boiler Name</label>
+                         <input type="text" [(ngModel)]="infos.name"   [ngClass]="{ 'is-invalid': submitted && upateF.name.errors }" formControlName="name" class="form-control" id="email_id" name="email_name" placeholder="Boiler Name" 
+                         >
+                      </div>
+                   </div>
+                   <div class="col-md-6">
+                     <div class="form-group" [ngClass]="{ 'error': submitted && upateF.title.errors }"> 
+                        <label for="email_id" class="control-label"> Tile</label>
+                        <input type="text" [(ngModel)]="infos.title"   [ngClass]="{ 'is-invalid': submitted && upateF.title.errors }" formControlName="title" class="form-control" id="email_id" name="title" placeholder="title" 
+                        >
+                     </div>
+                   </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                       <div class="form-group" [ngClass]="{ 'error': submitted && upateF.price.errors }"> 
+                          <label for="email_id" class="control-label"> Price</label>
+                          <input type="text" [(ngModel)]="infos.price"   [ngClass]="{ 'is-invalid': submitted && upateF.price.errors }" formControlName="price" class="form-control" id="email_id" name="email_name" placeholder="Price" 
+                          >
+                       </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group"> 
+                            <label for="email_id" class="control-label"> Type</label>
+                        <select [(ngModel)]="infos.type" class="custom-select" formControlName="type">
+                         <option value = "gas"> Gas </option> 
+                         <option value = "lpg"> LPG </option> 
+                       
+                        </select>
+                        </div>
+                       </div>
+                 </div>
+
+                 <div class="row">
+                  <div class="col-md-12">
+                     <div class="form-group" > 
+                        <label for="email_id" class="control-label"> About Product</label>
+                      
+                        <textarea  style = "width: 100%;
+                        height: 163px;" [(ngModel)]="infos.about" formControlName = "about"></textarea>
+                     </div>
+                  </div>
+             
+               </div>
+                 <div class="row">
+                    <div class="col-md-12">
+                       <div class="form-group" > 
+                          <label for="email_id" class="control-label"> Feature - 1</label>
+                          <input type="text" [(ngModel)]="infos.feature1"   formControlName="feature1" class="form-control" id="email_id" name="email_name" placeholder="feature" 
+                          >
+                       </div>
+                    </div>
+               
+                 </div>
+                 <div class="row">
+                    <div class="col-md-12">
+                       <div class="form-group" > 
+                          <label for="email_id" class="control-label"> Feature - 2</label>
+                          <input type="text" [(ngModel)]="infos.feature2"   formControlName="feature2" class="form-control" id="email_id" name="email_name" placeholder="feature" 
+                          >
+                       </div>
+                    </div>
+               
+                 </div>
+                 <div class="row">
+                    <div class="col-md-12">
+                       <div class="form-group" > 
+                          <label for="email_id" class="control-label"> Feature - 3</label>
+                          <input type="text" [(ngModel)]="infos.feature3"   formControlName="feature3" class="form-control" id="email_id" name="email_name" placeholder="feature" 
+                          >
+                       </div>
+                    </div>
+               
+                 </div>
+                 <div class="row">
+                    <div class="col-md-12">
+                       <div class="form-group" > 
+                          <label for="email_id" class="control-label"> Feature - 4</label>
+                          <input type="text" [(ngModel)]="infos.feature4"   formControlName="feature4" class="form-control" id="email_id" name="email_name" placeholder="feature" 
+                          >
+                       </div>
+                    </div>
+               
+                 </div>
+                 <div class="row">
+                    <div class="col-md-12">
+                       <div class="form-group" > 
+                          <label for="email_id" class="control-label"> Feature - 5</label>
+                          <input type="text" [(ngModel)]="infos.feature5"   formControlName="feature5" class="form-control" id="email_id" name="email_name" placeholder="feature" 
+                          >
+                       </div>
+                    </div>
+               
+                 </div>
+                 <div class="row">
+                    <div class="col-md-12">
+                       <div class="form-group" > 
+                          <label for="email_id" class="control-label"> Feature - 6</label>
+                          <input type="text" [(ngModel)]="infos.feature6"   formControlName="feature6" class="form-control" id="email_id" name="email_name" placeholder="feature" 
+                          >
+                       </div>
+                    </div>
+               
+                 </div>
+                 <div class="row">
+                    <div class="col-md-12">
+                       <div class="form-group" > 
+                          <label for="email_id" class="control-label"> Feature - 7</label>
+                          <input type="text" [(ngModel)]="infos.feature7"   formControlName="feature7" class="form-control" id="email_id" name="email_name" placeholder="feature" 
+                          >
+                       </div>
+                    </div>
+               
+                 </div>
+                 <div class="row">
+                    <div class="col-md-12">
+                       <div class="form-group" > 
+                          <label for="email_id" class="control-label"> Feature - 8</label>
+                          <input type="text" [(ngModel)]="infos.feature8"   formControlName="feature8" class="form-control" id="email_id" name="email_name" placeholder="feature" 
+                          >
+                       </div>
+                    </div>
+               
+                 </div>
+
+                <div class="form-group">
+                   <!-- Submit button !-->
+                   <button  class="btn btn-secondary btn-blue"style="color:white">Submit</button>
+                </div>
+                </form>
+             </div>
+          </div>
+       </div>
+    </div>
+ </ng-template>
+ <ng-template #templateDelete>
+    <div class="modal-header">
+       <h4 class="modal-title pull-left">Delete Product</h4>
+       <button type="button" class="close pull-right" aria-label="Close" (click)="modalRefDel.hide()">
+       <span aria-hidden="true">&times;</span>
+       </button>
+    </div>
+    <div class="modal-body">
+       <p>Are you sure you want to delete this product?</p>
+       <button _ngcontent-c4="" class="btn btn-blue" style="color: white;"  type="button" (click) = "confirmDelete()">Yes</button>
+       <button _ngcontent-c4="" class="btn btn-danger" style="margin-left:10px" type="button" (click)="modalRefDel.hide()">No</button>
+    </div>
+ </ng-template>
+ 
+ 

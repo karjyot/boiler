@@ -1,0 +1,105 @@
+<div class="top-content">
+  <div class="container">
+    <h3 class="text-center">Choose controls for your {{listProducts.boiler_name}}</h3>
+    <p class="text-center">We'll install your controls during your boiler installation & show you how to use them</p>
+  </div>
+</div>
+<section class="control-sec">
+  <div class="container pd-control">
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-sm-12 col-sm-12" *ngFor="let ct of controls">
+        <div class="checkout-block-img">
+          <h4>{{ct.name}}</h4>
+          <p>{{ct.title}}</p>
+          <img src="{{ct.image}}" class="img-fluid">
+
+          <p><a (click)="showReadMore(ct.id)" style="cursor: pointer;">Read more</a> <i class="fa fa-caret-down" aria-hidden="true"></i></p>
+          <ul class="list text-left" *ngIf="showMyContainer[ct.id]">
+
+            <li *ngIf="ct.feature1">{{ct.feature1}}</li>
+            <li *ngIf="ct.feature2">{{ct.feature2}}</li>
+            <li *ngIf="ct.feature3">{{ct.feature3}}</li>
+            <li *ngIf="ct.feature4">{{ct.feature4}}</li>
+            <li *ngIf="ct.feature5">{{ct.feature5}}</li>
+            <li *ngIf="ct.feature6">{{ct.feature6}}</li>
+            <li *ngIf="ct.feature7">{{ct.feature7}}</li>
+            <li *ngIf="ct.feature8">{{ct.feature8}}</li>
+           
+
+
+           
+
+        </ul>
+
+          <a class="checkout-blk-button"  (click) = "selectControl(ct.id)" style="color:white;cursor: pointer;" *ngIf='ct.price != 0'>+ £{{ct.price}}</a>
+          <a class="checkout-blk-button"  (click) = "selectControl(ct.id)" style="color:white;cursor: pointer;" *ngIf='ct.price == 0 || ""'>Free</a>
+          
+
+          <div>
+            <input type="checkbox" id="{{ct.id}}" name="myCheckbox" [checked]="ct.isChecked" (change) = "selectOnlyThis($event)">
+            <label for="{{ct.id}}"></label>
+          </div>
+              
+        </div>
+      
+    </div>
+    <div class="col-md-4 col-sm-6 col text-center">
+      <button type="button" class="btn btn-info my-4 btn-block text-center" (click)="installDate()">Next: Select install date</button>
+    </div>
+    <a _ngcontent-mix-c282="" href="javascript:;" (click) = "back()" class="btn-back"><i _ngcontent-mix-c282="" aria-hidden="true" class="fa fa-angle-left"></i> </a>
+  </div>
+  </div>
+</section>
+
+
+
+
+
+<!-- <div class="card" >
+
+    <div id="controlData" >
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6 col-sm-12" *ngFor="let ct of controls">
+            <div class="checkout-block-img">
+              <h4>{{ct.name}}</h4>
+              <p>{{ct.title}}</p>
+              <img src="{{ct.image}}" class="img-fluid">
+
+              <p><a (click)="showReadMore(ct.id)" style="cursor: pointer;">Read more</a> <i class="fa fa-caret-down" aria-hidden="true"></i></p>
+              <ul class="list text-left" *ngIf="showMyContainer[ct.id]">
+
+                <li *ngIf="ct.feature1">{{ct.feature1}}</li>
+                <li *ngIf="ct.feature2">{{ct.feature2}}</li>
+                <li *ngIf="ct.feature3">{{ct.feature3}}</li>
+                <li *ngIf="ct.feature4">{{ct.feature4}}</li>
+                <li *ngIf="ct.feature5">{{ct.feature5}}</li>
+                <li *ngIf="ct.feature6">{{ct.feature6}}</li>
+                <li *ngIf="ct.feature7">{{ct.feature7}}</li>
+                <li *ngIf="ct.feature8">{{ct.feature8}}</li>
+               
+
+
+               
+
+            </ul>
+
+              <a class="checkout-blk-button" style="color:white" *ngIf='ct.price != 0'>+ £{{ct.price}}</a>
+              <a class="checkout-blk-button" style="color:white" *ngIf='ct.price == 0 || ""'>Free</a>
+              
+
+              <div>
+                <input type="checkbox" id="{{ct.id}}" name="myCheckbox" [checked]="ct.isChecked" (change) = "selectOnlyThis($event)">
+                <label for="{{ct.id}}"></label>
+              </div>
+                  
+            </div>
+          </div>
+          <button type="button" class="btn btn-info my-4 btn-block text-center" (click)="installDate()">Submit</button>
+        </div>
+
+
+
+      </div>
+    </div>
+  </div> -->

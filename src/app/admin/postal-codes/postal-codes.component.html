@@ -1,0 +1,388 @@
+<div class="container-fluid">
+    <div id="ui-view">
+       <div>
+          <div class="animated fadeIn">
+             <div class="card">
+                <div class="card-header">
+                   <i class="fa fa-edit"></i> Postcodes
+                   <div class="card-header-actions">
+                   </div>
+                </div>
+                <div class="card-body">
+                  
+                    <div class="container">
+                        <div class="row">
+                          <div class="col-md-12 ">
+                            <nav>
+                              <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true" (click) = "getPostalCodes('A')">Category A</a>
+                                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false" (click) = "getPostalCodes('B')">Category B</a>
+                                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false" (click) = "getPostalCodes('C')">Category C</a>
+                                <a class="nav-item nav-link" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false" (click) = "getPostalCodes('D')">Category D</a>
+                                <a class="nav-item nav-link" id="nav-about-tab1" data-toggle="tab" href="#nav-about1" role="tab" aria-controls="nav-about1" aria-selected="false" (click) = "getPostalCodes('E')">Category E</a>
+                              </div>
+                            </nav>
+                            <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                              <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                                    <div class="row">
+                                       <div class="col-sm-12 col-md-6">
+                                          <div class="dataTables_length" id="DataTables_Table_0_length">
+                                             <label>
+                                                Show 
+                                                <select name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" [(ngModel)]="perPage" class="custom-select custom-select-sm form-control form-control-sm">
+                                                <option value="10">10</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                                <option value="100">100</option>
+                                                </select>
+                                                entries
+                                             </label>
+                                          </div>
+                                       </div>
+                                       <div class="col-sm-12 col-md-6">
+                                          <div id="DataTables_Table_0_filter" class="dataTables_filter searchBar"><label>Search:<input type="search" [(ngModel)]="searchText" class="form-control form-control-sm" placeholder="" aria-controls="DataTables_Table_0"></label></div>
+                                       </div>
+                                    </div>
+                                    <div>
+                                       <button _ngcontent-c4="" *ngIf="details && details.type != 'admin'" (click)="addUser(addUserPop,'A');"aria-pressed="true" class="btn btn-block btn-outline-primary active btn-blue" type="button" style="
+                                       width: 111px;
+                                       margin: 0 0 17px 0;
+                                       ">Add</button>
+                                    </div>
+                                    <div class="row">
+                                       <div class="col-sm-12">
+                                          <table class="table table-striped table-bordered datatable dataTable no-footer  table-responsive-sm table-bordered table-striped table-sm" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info" style="border-collapse: collapse !important">
+                                             <thead>
+                                                <tr role="row">
+                                                   <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Username: activate to sort column descending" style="width: 150px;">#</th>
+                                                   <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Username: activate to sort column descending" style="width: 281px;">Code</th>
+                                                 
+                                                   
+                                                </tr>
+                                             </thead>
+                                             <tbody>
+                                                <tr role="row" class="odd" *ngFor="let users of listUsers| filter:searchText| paginate: { itemsPerPage: perPage, currentPage: p } index as i">
+                                                   <td class="sorting_1 wordBreak">{{i+1}}</td>
+                                                   <td class="sorting_1 wordBreak">{{users.code}}</td>
+                                                   
+                                                </tr>
+                                             </tbody>
+                                          </table>
+                                       </div>
+                                    </div>
+                                    <div class="row">
+                                       <div class="col-sm-12 col-md-5">
+                                          <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">{{perPage}} of {{totalEntries}} entries</div>
+                                       </div>
+                                       <div class="col-sm-12 col-md-7">
+                                          <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
+                                             <ul class="pagination">
+                                                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                                             </ul>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                                    <div class="row">
+                                       <div class="col-sm-12 col-md-6">
+                                          <div class="dataTables_length" id="DataTables_Table_0_length">
+                                             <label>
+                                                Show 
+                                                <select name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" [(ngModel)]="perPage" class="custom-select custom-select-sm form-control form-control-sm">
+                                                <option value="10">10</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                                <option value="100">100</option>
+                                                </select>
+                                                entries
+                                             </label>
+                                          </div>
+                                       </div>
+                                       <div class="col-sm-12 col-md-6">
+                                          <div id="DataTables_Table_0_filter" class="dataTables_filter searchBar"><label>Search:<input type="search" [(ngModel)]="searchText" class="form-control form-control-sm" placeholder="" aria-controls="DataTables_Table_0"></label></div>
+                                       </div>
+                                    </div>
+                                    <div>
+                                       <button _ngcontent-c4="" *ngIf="details && details.type != 'admin'" (click)="addUser(addUserPop,'B');"aria-pressed="true" class="btn btn-block btn-outline-primary active btn-blue" type="button" style="
+                                       width: 111px;
+                                       margin: 0 0 17px 0;
+                                       ">Add</button>
+                                    </div>
+                                    <div class="row">
+                                       <div class="col-sm-12">
+                                          <table class="table table-striped table-bordered datatable dataTable no-footer  table-responsive-sm table-bordered table-striped table-sm" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info" style="border-collapse: collapse !important">
+                                             <thead>
+                                                <tr role="row">
+                                                   <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Username: activate to sort column descending" style="width: 150px;">#</th>
+                                                   <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Username: activate to sort column descending" style="width: 281px;">Code</th>
+                                                 
+                                                   
+                                                </tr>
+                                             </thead>
+                                             <tbody>
+                                                <tr role="row" class="odd" *ngFor="let users of listUsers| filter:searchText| paginate: { itemsPerPage: perPage, currentPage: p } index as i">
+                                                   <td class="sorting_1 wordBreak">{{i+1}}</td>
+                                                   <td class="sorting_1 wordBreak">{{users.code}}</td>
+                                                   
+                                                </tr>
+                                             </tbody>
+                                          </table>
+                                       </div>
+                                    </div>
+                                    <div class="row">
+                                       <div class="col-sm-12 col-md-5">
+                                          <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">{{perPage}} of {{totalEntries}} entries</div>
+                                       </div>
+                                       <div class="col-sm-12 col-md-7">
+                                          <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
+                                             <ul class="pagination">
+                                                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                                             </ul>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                                    <div class="row">
+                                       <div class="col-sm-12 col-md-6">
+                                          <div class="dataTables_length" id="DataTables_Table_0_length">
+                                             <label>
+                                                Show 
+                                                <select name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" [(ngModel)]="perPage" class="custom-select custom-select-sm form-control form-control-sm">
+                                                <option value="10">10</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                                <option value="100">100</option>
+                                                </select>
+                                                entries
+                                             </label>
+                                          </div>
+                                       </div>
+                                       <div class="col-sm-12 col-md-6">
+                                          <div id="DataTables_Table_0_filter" class="dataTables_filter searchBar"><label>Search:<input type="search" [(ngModel)]="searchText" class="form-control form-control-sm" placeholder="" aria-controls="DataTables_Table_0"></label></div>
+                                       </div>
+                                    </div>
+                                    <div>
+                                       <button _ngcontent-c4="" *ngIf="details && details.type != 'admin'" (click)="addUser(addUserPop,'C');"aria-pressed="true" class="btn btn-block btn-outline-primary active btn-blue" type="button" style="
+                                       width: 111px;
+                                       margin: 0 0 17px 0;
+                                       ">Add</button>
+                                    </div>
+                                    <div class="row">
+                                       <div class="col-sm-12">
+                                          <table class="table table-striped table-bordered datatable dataTable no-footer  table-responsive-sm table-bordered table-striped table-sm" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info" style="border-collapse: collapse !important">
+                                             <thead>
+                                                <tr role="row">
+                                                   <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Username: activate to sort column descending" style="width: 150px;">#</th>
+                                                   <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Username: activate to sort column descending" style="width: 281px;">Code</th>
+                                                 
+                                                   
+                                                </tr>
+                                             </thead>
+                                             <tbody>
+                                                <tr role="row" class="odd" *ngFor="let users of listUsers| filter:searchText| paginate: { itemsPerPage: perPage, currentPage: p } index as i">
+                                                   <td class="sorting_1 wordBreak">{{i+1}}</td>
+                                                   <td class="sorting_1 wordBreak">{{users.code}}</td>
+                                                   
+                                                </tr>
+                                             </tbody>
+                                          </table>
+                                       </div>
+                                    </div>
+                                    <div class="row">
+                                       <div class="col-sm-12 col-md-5">
+                                          <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">{{perPage}} of {{totalEntries}} entries</div>
+                                       </div>
+                                       <div class="col-sm-12 col-md-7">
+                                          <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
+                                             <ul class="pagination">
+                                                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                                             </ul>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="tab-pane fade" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
+                                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                                    <div class="row">
+                                       <div class="col-sm-12 col-md-6">
+                                          <div class="dataTables_length" id="DataTables_Table_0_length">
+                                             <label>
+                                                Show 
+                                                <select name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" [(ngModel)]="perPage" class="custom-select custom-select-sm form-control form-control-sm">
+                                                <option value="10">10</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                                <option value="100">100</option>
+                                                </select>
+                                                entries
+                                             </label>
+                                          </div>
+                                       </div>
+                                       <div class="col-sm-12 col-md-6">
+                                          <div id="DataTables_Table_0_filter" class="dataTables_filter searchBar"><label>Search:<input type="search" [(ngModel)]="searchText" class="form-control form-control-sm" placeholder="" aria-controls="DataTables_Table_0"></label></div>
+                                       </div>
+                                    </div>
+                                    <div>
+                                       <button _ngcontent-c4="" *ngIf="details && details.type != 'admin'" (click)="addUser(addUserPop,'D');"aria-pressed="true" class="btn btn-block btn-outline-primary active btn-blue" type="button" style="
+                                       width: 111px;
+                                       margin: 0 0 17px 0;
+                                       ">Add</button>
+                                    </div>
+                                    <div class="row">
+                                       <div class="col-sm-12">
+                                          <table class="table table-striped table-bordered datatable dataTable no-footer  table-responsive-sm table-bordered table-striped table-sm" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info" style="border-collapse: collapse !important">
+                                             <thead>
+                                                <tr role="row">
+                                                   <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Username: activate to sort column descending" style="width: 150px;">#</th>
+                                                   <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Username: activate to sort column descending" style="width: 281px;">Code</th>
+                                                 
+                                                   
+                                                </tr>
+                                             </thead>
+                                             <tbody>
+                                                <tr role="row" class="odd" *ngFor="let users of listUsers| filter:searchText| paginate: { itemsPerPage: perPage, currentPage: p } index as i">
+                                                   <td class="sorting_1 wordBreak">{{i+1}}</td>
+                                                   <td class="sorting_1 wordBreak">{{users.code}}</td>
+                                                   
+                                                </tr>
+                                             </tbody>
+                                          </table>
+                                       </div>
+                                    </div>
+                                    <div class="row">
+                                       <div class="col-sm-12 col-md-5">
+                                          <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">{{perPage}} of {{totalEntries}} entries</div>
+                                       </div>
+                                       <div class="col-sm-12 col-md-7">
+                                          <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
+                                             <ul class="pagination">
+                                                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                                             </ul>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="tab-pane fade" id="nav-about1" role="tabpanel" aria-labelledby="nav-about-tab1">
+                                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                                    <div class="row">
+                                       <div class="col-sm-12 col-md-6">
+                                          <div class="dataTables_length" id="DataTables_Table_0_length">
+                                             <label>
+                                                Show 
+                                                <select name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" [(ngModel)]="perPage" class="custom-select custom-select-sm form-control form-control-sm">
+                                                <option value="10">10</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                                <option value="100">100</option>
+                                                </select>
+                                                entries
+                                             </label>
+                                          </div>
+                                       </div>
+                                       <div class="col-sm-12 col-md-6">
+                                          <div id="DataTables_Table_0_filter" class="dataTables_filter searchBar"><label>Search:<input type="search" [(ngModel)]="searchText" class="form-control form-control-sm" placeholder="" aria-controls="DataTables_Table_0"></label></div>
+                                       </div>
+                                    </div>
+                                    <div>
+                                       <button _ngcontent-c4="" *ngIf="details && details.type != 'admin'" (click)="addUser(addUserPop,'E');"aria-pressed="true" class="btn btn-block btn-outline-primary active btn-blue" type="button" style="
+                                       width: 111px;
+                                       margin: 0 0 17px 0;
+                                       ">Add</button>
+                                    </div>
+                                    <div class="row">
+                                       <div class="col-sm-12">
+                                          <table class="table table-striped table-bordered datatable dataTable no-footer  table-responsive-sm table-bordered table-striped table-sm" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info" style="border-collapse: collapse !important">
+                                             <thead>
+                                                <tr role="row">
+                                                   <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Username: activate to sort column descending" style="width: 150px;">#</th>
+                                                   <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Username: activate to sort column descending" style="width: 281px;">Code</th>
+                                                 
+                                                   
+                                                </tr>
+                                             </thead>
+                                             <tbody>
+                                                <tr role="row" class="odd" *ngFor="let users of listUsers| filter:searchText| paginate: { itemsPerPage: perPage, currentPage: p } index as i">
+                                                   <td class="sorting_1 wordBreak">{{i+1}}</td>
+                                                   <td class="sorting_1 wordBreak">{{users.code}}</td>
+                                                   
+                                                </tr>
+                                             </tbody>
+                                          </table>
+                                       </div>
+                                    </div>
+                                    <div class="row">
+                                       <div class="col-sm-12 col-md-5">
+                                          <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">{{perPage}} of {{totalEntries}} entries</div>
+                                       </div>
+                                       <div class="col-sm-12 col-md-7">
+                                          <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
+                                             <ul class="pagination">
+                                                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                                             </ul>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                            </div>
+                          
+                          </div>
+                        </div>
+                  </div>
+
+
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+
+
+ <ng-template #addUserPop>
+    <div class="modal-header">
+       <h4 class="modal-title pull-left">Add/Update</h4>
+       <button type="button" class="close pull-right" aria-label="Close" (click)="cancelAddUser()">
+       <span aria-hidden="true">&times;</span>
+       </button>
+    </div>
+    <div class="modal-body">
+       <div class="row">
+          <div class="col-md-12">
+             <div >
+                <form class="signup"  [formGroup]="signupForm" (ngSubmit)="signup()">
+      
+                   <div class="col-md-6">
+                      <div class="form-group"> 
+                         <label for="email_id" class="control-label">No. of bookings per day</label>
+                         <input type="text" [(ngModel)]="signupData.bookings"   formControlName="bookings" class="form-control" id="email_id" name="email_name" placeholder="Bookings" >
+                      </div>
+                   </div>
+
+
+                   <div class="col-md-6">
+                     <div class="form-group"> 
+                        <label for="email_id" class="control-label">Price</label>
+                        <input type="text" [(ngModel)]="signupData.price"   formControlName="price" class="form-control" id="email_id" name="email_name" placeholder="price" >
+                     </div>
+                  </div>
+             
+                <div class="form-group">
+                   <!-- Submit button !-->
+                   <button  class="btn btn-secondary btn-blue" style="color:white">Submit</button>
+                </div>
+                </form>
+             </div>
+          </div>
+       </div>
+    </div>
+ </ng-template>
