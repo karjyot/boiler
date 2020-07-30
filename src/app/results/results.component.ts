@@ -77,4 +77,7 @@ console.log(postalCodePrice)
     this.loginService.setProduct(boiler)
     this.router.navigateByUrl('/more-details')
   }
+  back(){
+    window.history.back()
+  }
 }

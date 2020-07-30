@@ -123,8 +123,16 @@
     </div>
     <div class="modal-body" *ngIf="currentUser">
        <div class="container">
-          <div class="row">
-      
+         <h5 class="adm-cstm-hd">Boiler Selection</h5>
+         <div class="question_box" *ngFor="let ques of fullDetails.questions_group;index as i">
+            <h5>Q{{i+1}} {{ques.name}}</h5>
+            <p>{{ques.category}}</p>
+
+         </div>
+
+         <hr>
+         <h5 class="adm-cstm-hd">User Details</h5>
+          <div class="row">            
             <div class="col-md-4">
               <label class="label-bold">Name</label> 
               <p>{{currentUser[0].first_name}} {{currentUser[0].last_name}}</p>

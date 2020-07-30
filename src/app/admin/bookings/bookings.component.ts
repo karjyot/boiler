@@ -189,6 +189,8 @@ export class BookingsComponent implements OnInit {
 
       viewUserInfo(template: any,users){
         this.fullDetails = users;
+        this.fullDetails.questions_group = JSON.parse(users.questions_group);
+        console.log(this.fullDetails)
         this.ngxService.start();
         this.loginService.bookingDetails(users.id).subscribe(
           res => {
@@ -329,7 +331,7 @@ export class BookingsComponent implements OnInit {
       getBookings(){
         this.ngxService.start()
     
-        this.loginService.bookings({postalCode:this.loginService.getPostalCode().postalCode.toUpperCase()}).subscribe((result) => {
+        this.loginService.bookings(null).subscribe((result) => {
         let bookings =  result["success"];
         let limit = result['availableLimits'];
         this.loginService.customLimitsVideo().subscribe((result) => {

@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
   isSamePlace = false
   postalCode : any;
   index:any;
+  isSomeWhereElse:any
   questions:any;
   selectedOptions = [];
   ngOnInit(): void {
@@ -111,6 +112,9 @@ this.index = index
     if(type == 'in the same place'){
       this.isSamePlace = true;
     }
+    if(type == 'somewhere else'){
+      this.isSomeWhereElse = true;
+    }
     if(type == 'in the same place' || type == 'up to 2 meters away' || type == 'somewhere else'){
       $(event.target).closest('.order-section').removeClass('active-section');
       $('.order-step-5').addClass('active-section');
@@ -128,7 +132,7 @@ this.index = index
       $('.order-step-8').addClass('active-section');
     }
     if((type == '1' || type == '2' || type == '3+') && showers){
-      if(this.isSamePlace){
+      if(this.isSomeWhereElse || this.isBackBoiler){
         $(event.target).closest('.order-section').removeClass('active-section');
         $('.order-step-10').addClass('active-section');
       }else{
@@ -141,23 +145,20 @@ this.index = index
       $(event.target).closest('.order-section').removeClass('active-section');
       $('.order-step-10').addClass('active-section');
     }
-    if (!this.selectedOptions.some(function(entry) { return entry.question_id === category.question_id;})) {
+  //   if (!this.selectedOptions.some(function(entry) { return entry.question_id === category.question_id;})) {
+  //     this.selectedOptions.push(category);
+  // }
+
+    let indexFind = this.selectedOptions.findIndex(function (entry) {
+      return entry.question_id === category.question_id;
+  });
+
+  if (indexFind === -1) {
       this.selectedOptions.push(category);
+  } else {
+      this.selectedOptions[indexFind] = category;
   }
-    // if (!this.selectedOptions.some(function(v){return v.id === -1})) {
-    //   this.selectedOptions.push(category);
-    // }else{
-      
-    // }
-    // var found = $.inArray(category, this.selectedOptions);
-    // console.log(found)
-    // if (found == -1) {
-    //   this.selectedOptions.push(category);
-       
-    // } else {
-    //   this.selectedOptions.splice(found, 1);
-    // }
-    console.log(this.selectedOptions)
+  console.log(this.selectedOptions)
 
     
   }

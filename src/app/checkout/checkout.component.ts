@@ -102,6 +102,7 @@ export class CheckoutComponent implements OnInit {
   addressForm:FormGroup;
   installationForm:FormGroup;
   submitted = false;
+  excludeDays: number[] = [0, 6];
   controlPrice:any;
   totalAddress = [];
   stripeTest: FormGroup;
@@ -156,6 +157,7 @@ export class CheckoutComponent implements OnInit {
   breakDowns:any;
   modalRef: BsModalRef | null;
   nextBtnDisabled: boolean = false;
+  showPrice =false;
   ngOnInit() {
     this.getHomeContent()
     this.getBreakDowns()
@@ -214,7 +216,7 @@ export class CheckoutComponent implements OnInit {
       //ns: ['',[Validators.required]], 
   })
 
-  this.postalCode = this.loginService.getPostalCode().postalCode
+  //this.postalCode = this.loginService.getPostalCode().postalCode
   this.stripeTest = this.formBuilder.group({
     name: ['',[Validators.required]], 
     checkboxTerms:['',[Validators.required]]
@@ -241,7 +243,28 @@ export class CheckoutComponent implements OnInit {
       this.installationDate = moment(arg.day.date).format( 'YYYY-MM-DD  HH:mm:ss' )
       $("#collapseOne").collapse('dispose');
       $("#videoOne").collapse('show');
+      var p = $( "#videoOne" ).first();
+      var position = p.position();
+      
+        $('html, body').animate({
+          scrollTop: position.top + 300
+      }, 0);
+     
+     
+     
+     
+     
     }
+    if( new Date(this.installationDate).getDay() == 0 ){
+      let installationDate = new Date(this.installationDate);
+      installationDate .setDate(installationDate .getDate() - 2);
+      this.viewDate1 = installationDate
+    }else{
+      let installationDate = new Date(this.installationDate);
+    installationDate .setDate(installationDate .getDate() - 1);
+    this.viewDate1 = installationDate
+    }
+    
  
 
   }
@@ -319,7 +342,13 @@ export class CheckoutComponent implements OnInit {
       });
   }
   hoursClick(event) {
-    console.log(event)
+   
+    let installationDate = new Date(this.installationDate);
+    if( new Date(event).getTime() > installationDate.getTime()){
+      this.toastr.error("Date should be less than from the installation date.")
+      return;
+    }    
+
     let date = this.isDateBeforeToday(event);
 
     if(new Date(event).setHours(0,0,0,0) == new Date().setHours(0,0,0,0)){
@@ -331,8 +360,12 @@ export class CheckoutComponent implements OnInit {
       $("#videoOne").collapse('dispose');
       $("#collapseTwo").collapse('show');
       
-      // $("#videoOne").collapse('hide');
-      // $("#collapseTwo").addClass('show');
+      var p = $("#collapseTwo" ).first();
+      var position = p.position();
+      
+        $('html, body').animate({
+          scrollTop: position.top + 300
+      }, 0);
     }else{
       this.toastr.error("Date should be greater than today's date.")
      
@@ -348,7 +381,13 @@ export class CheckoutComponent implements OnInit {
 
     this.submitted = true
     if(this.addressForm.invalid){
+      const firstElementWithError = document.querySelector('.ng-invalid');
+
+      if (firstElementWithError) {
+        firstElementWithError.scrollIntoView({ behavior: 'smooth' });
+      }
       return;
+      
     }
 
     if(this.showAddress){
@@ -376,7 +415,13 @@ export class CheckoutComponent implements OnInit {
     
     $("#collapseTwo").collapse('dispose');
     $("#collapseThree").collapse('show');
-  
+    var p = $("#collapseThree" ).first();
+    var position = p.position();
+    
+      $('html, body').animate({
+        scrollTop: position.top + 300
+    }, 0);
+    this.showPrice = true
   }
 
   onSubmitAddress(){

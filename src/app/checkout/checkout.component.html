@@ -35,7 +35,7 @@
                         <div class="card-header" id="headingOne">
                           <h5 class="mb-0">
                             <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                              <div class="acc-title"><span>1</span><h4>Installation Date : <b style="color:green">{{installationDate | date}}</b></h4></div>
+                              <div class="acc-title"><span>1</span><h4>Installation Date : <b style="color:green">{{installationDate | date:'E, d MMMM y'}}</b></h4></div>
                             </button>
                           </h5>
                      
@@ -66,7 +66,7 @@
                                   mwlCalendarToday
                                   [(viewDate)]="viewDate"
                                 >
-                                  Today
+                                  Current
                                 </div>
                                 <div
                                   class="btn btn-primary"
@@ -151,7 +151,7 @@
                           <h5 class="mb-0" (click)="openVideo()">
                             
                             <button class="btn btn-link" data-toggle="collapse" data-target="#videoOne" aria-expanded="true" aria-controls="videoOne">
-                              <div class="acc-title"><span>2</span><h4>Pre-install Video Survey: <b style="color:green">{{videDate | date:'short'}}</b></h4></div>
+                              <div class="acc-title"><span>2</span><h4>Pre-install Video Survey: <b style="color:green">{{videDate |  date:'E, d MMMM y h:mm a'}}</b></h4></div>
                             </button>
                           </h5>
                         </div>
@@ -172,6 +172,7 @@
                                   [view]="view1"
                                   [(viewDate)]="viewDate1"
                                   (viewDateChange)="closeOpenMonthViewDay()"
+                                  [excludeDays]="excludeDays"
                                 >
                                   Previous
                                 </div>
@@ -179,6 +180,7 @@
                                   class="btn btn-outline-secondary"
                                   mwlCalendarToday
                                   [(viewDate)]="viewDate1"
+                                 
                                 >
                                   Today
                                 </div>
@@ -188,13 +190,14 @@
                                   [view]="view1"
                                   [(viewDate)]="viewDate1"
                                   (viewDateChange)="closeOpenMonthViewDay()"
+                                  [excludeDays]="excludeDays"
                                 >
                                   Next
                                 </div>
                               </div>
                             </div>
                             <div class="col-md-8" style="margin-top: 13px;">
-                              <h3>{{ viewDate1 | calendarDate:(view1 + 'ViewTitle'):'en' }}</h3>
+                              <h3>{{ viewDate1 |  date:'E, d MMMM y' }}</h3>
                             </div>
                             <mwl-calendar-day-view
                             [events]="events"
@@ -202,6 +205,7 @@
                             [refresh]="refresh" 
                             [dayStartHour]="9"
                             [dayEndHour]="20"
+                            
                            
                             (hourSegmentClicked)="hoursClick($event.date)"
                             (beforeViewRender)="beforeViewRender($event)" 
@@ -239,6 +243,9 @@
                                             <option value="Ms">Ms</option>
                                             <option value="Dr">Dr</option>
                                           </select>
+                                          <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+                                            <div *ngIf="f.title.errors.required">Please complete this field</div>
+                                        </div>
                                       </div>
                                       <!-- <div class="col"> -->
 
@@ -248,23 +255,33 @@
                                     <!-- </div> -->
                                     <label>First name</label>
                                     <input type="text" [ngClass]="{ 'is-invalid': submitted && f.fname.errors }" formControlName="fname" class="form-control mb-3" placeholder="First name">
-
+                                    <div *ngIf="submitted && f.fname.errors" class="invalid-feedback">
+                                      <div *ngIf="f.fname.errors.required">Please complete this field</div>
+                                  </div>
 
                                     <!-- Last name -->
                                     <label>Last name</label>
                                     <input type="text" [ngClass]="{ 'is-invalid': submitted && f.lname.errors }"  formControlName="lname" class="form-control mb-3" placeholder="Last name">
-
+                                    <div *ngIf="submitted && f.lname.errors" class="invalid-feedback">
+                                      <div *ngIf="f.lname.errors.required">Please complete this field</div>
+                                  </div>
                                     <!-- Contact number -->
                                     <label>Contact number</label>
-                                    <input type="text" [ngClass]="{ 'is-invalid': submitted && f.contact.errors }" formControlName="contact" class="form-control mb-3" placeholder="Contact number">
-
+                                    <input type="number" [ngClass]="{ 'is-invalid': submitted && f.contact.errors }" formControlName="contact" class="form-control mb-3" placeholder="Contact number">
+                                    <div *ngIf="submitted && f.contact.errors" class="invalid-feedback">
+                                      <div *ngIf="f.contact.errors.required">Please complete this field</div>
+                                  </div>
                                     <!-- Email address -->
                                     <label>Email address</label>
                                     <input type="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" formControlName="email" class="form-control mb-3" placeholder="Email address" >
                                     
+                                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                      <div *ngIf="f.email.errors.required">Please complete this field</div>
+                                  </div>
+
                                     <label>Postcode</label>
                                     <input type="text" formControlName="postalCode" [(ngModel)] = "postalCode" class="form-control mb-3" placeholder="Postcode">
-                                    <button class="btn btn-info my-4 btn-block" type="button" (click) =  "search()" >Search</button>
+                                    <button class="btn btn-info my-4 btn-block" type="button" (click) =  "search()" >Find address</button>
                                     <select class="browser-default custom-select mb-3" *ngIf="searchCode"  formControlName="address">
                                       <option disabled="" value="" selected="selected">Select</option>
                                       <option value="{{data}}" *ngFor="let data of totalAddress">{{data}}</option>
@@ -305,7 +322,7 @@
                                       <div *ngIf="showAddressPostalCode" style="padding-top: 15px;">
                                         <label>Postcode</label>
                                         <input type="text" formControlName="postalCodeInstall" [(ngModel)] = "postalCode" class="form-control mb-3" placeholder="Postcode">
-                                        <button class="btn btn-info my-4 btn-block" type="button" (click) =  "search()" >Search</button>
+                                        <button class="btn btn-info my-4 btn-block" type="button" (click) =  "search()" >Find address</button>
 
                                         <select class="browser-default custom-select mb-3" *ngIf="searchCode"  formControlName="addressInstall">
                                           <option disabled="" value="" selected="selected">Select</option>
@@ -354,7 +371,8 @@
                         <div class="card-header" id="headingThree">
                           <h5 class="mb-0">
                             <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false"  href="#" aria-controls="collapseThree">
-                              <div class="acc-title"><span>4</span><h4>Payment</h4></div>
+                              <div class="acc-title"><span>4</span><h4>Payment : <b *ngIf="showPrice" style="color:green"> £{{finalPrice | number}} inc VAT
+                              </b></h4></div>
                             </button>
                           </h5>
                           
@@ -378,7 +396,7 @@
                                   <ngx-stripe-card  [options]="cardOptions" [elementsOptions]="elementsOptions" class="stripe-box form-control"></ngx-stripe-card>
                                 </div>
                                 <div class="col-sm-12 col-md-12 col-xs-12 mt-3">
-                                <div class="review-terms"><div class="form-controlGroup"><label class="control control--custom" for="accept-terms"><input class="control--custom-input" id="accept-terms" name="accept" type="checkbox" formControlName="checkboxTerms"><span class="control-indicator control-indicator--checkbox"></span> I agree to <strong><a routerLink="/terms" target="_blank" style="color:#f21d2e;text-transform: none;">Direct Heating Terms &amp; Conditions</a></strong></label></div></div></div>
+                                <div class="review-terms"><div class="form-controlGroup"><label class="control control--custom" for="accept-terms"><input class="control--custom-input" id="accept-terms" name="accept" type="checkbox" formControlName="checkboxTerms"><span class="control-indicator control-indicator--checkbox"></span> I agree to <strong><a routerLink="/terms" target="_blank" style="color:#152247;text-transform: none;">Direct Heating Terms &amp; Conditions</a></strong></label></div></div></div>
                              
                               <div class="col-sm-3 col-md-3 col-xs-12">
                                 <button type="submit" class="button btn btn-info my-4 btn-block">
