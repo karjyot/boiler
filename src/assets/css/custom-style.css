@@ -35,7 +35,7 @@ body{font-family: 'Open Sans', sans-serif !important;color: #132042;}
     border: 1px solid #EC346B;
     display: flex;justify-content: space-around;
     min-height: 213px;
-    align-items: center;padding: 30px 20px;    flex-direction: column;min-height: 213px;
+    align-items: center;padding: 30px 15px;    flex-direction: column;min-height: 213px;
 }
 .q-a-box span {
     display: inline-block;
@@ -290,6 +290,9 @@ td.fc-day-past {
         border: 0;margin-bottom: 10px;
        
     }
+    .logo-div-left img{
+        max-width:85%;
+    }
     .md-accordion .card h5{
         font-size: 20px;
       font-family: "Poppins";
@@ -509,6 +512,9 @@ ul.list.text-left{font-size: 14px;}
     border-radius: 2px;
     border: 1px solid #e3e3e3;
 }
+.cal-disabled .cal-day-number {
+    opacity: 0.1;
+  }
 .tot-price h4{color:#152247;font-weight: bold;}
 .sidebar-text {
     margin-left: 20px;

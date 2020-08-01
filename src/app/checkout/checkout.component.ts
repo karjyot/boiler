@@ -94,6 +94,7 @@ export class CheckoutComponent implements OnInit {
   showAddress:any;
   postalCode:any;
   installationDate:any;
+  viewDate2:any;
   videDate:any;
   showAddressInstall = false
 
@@ -255,19 +256,25 @@ export class CheckoutComponent implements OnInit {
      
      
     }
+
+    
     if( new Date(this.installationDate).getDay() == 0 ){
       let installationDate = new Date(this.installationDate);
       installationDate .setDate(installationDate .getDate() - 2);
-      this.viewDate1 = installationDate
+      this.viewDate2 = installationDate
     }else{
       let installationDate = new Date(this.installationDate);
     installationDate .setDate(installationDate .getDate() - 1);
-    this.viewDate1 = installationDate
+    this.viewDate2 = installationDate
     }
     
  
 
   }
+
+
+  
+
 
 
   isDateBeforeToday(date) {
@@ -620,6 +627,51 @@ export class CheckoutComponent implements OnInit {
           this.toastr.error("Postcode is invalid.")
          }); 
   }
+
+
+  increment(): void {
+    console.log(this.viewDate1)
+    console.log(this.viewDate2)
+    if( new Date(this.viewDate1) > new Date(this.viewDate2)){
+      this.toastr.info("Date should be less than from the installation date.")
+      //return;
+    }    
+
+    this.changeDateHour(addPeriod(this.view1, this.viewDate1, 0));
+  }
+
+  decrement(): void {
+    // if( new Date(this.viewDate1) > new Date(this.viewDate2)){
+    //   this.toastr.error("Date should be less than from the installation date.")
+    //  // return;
+    // }    
+    this.changeDateHour(subPeriod(this.view1, this.viewDate1, 0));
+  }
+
+  dateIsValidhour(date: Date): boolean {
+    return date >= this.minDate && date <= this.viewDate2;
+  }
+  dateOrViewChangedHour(): void {
+    // this.prevBtnDisabled = !this.dateIsValid(
+    //   endOfPeriod(this.view, subPeriod(this.view1, this.viewDate1, 1))
+    // );
+    this.nextBtnDisabled = !this.dateIsValidhour(
+      startOfPeriod(this.view, addPeriod(this.view1, this.viewDate1, 1))
+    );
+    if (this.viewDate1 < this.minDate) {
+      this.changeDateHour(this.minDate);
+    } else if (this.viewDate1 > this.viewDate2) {
+      this.changeDateHour(this.viewDate2);
+    }
+  }
+
+  changeDateHour(date: Date): void {
+    this.viewDate1 = date;
+    this.dateOrViewChangedHour();
+  }
+
+
+
 
   changeDate(date: Date): void {
     this.viewDate = date;
