@@ -91,7 +91,7 @@ export class CheckoutComponent implements OnInit {
   calendarOptions: CalendarOptions;
  // calendarComponent: FullCalendarComponent;
   eventsModel: any;
-  showAddress:any;
+  showAddress = false;
   postalCode:any;
   installationDate:any;
   viewDate2:any;
