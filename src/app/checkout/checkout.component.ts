@@ -452,7 +452,7 @@ export class CheckoutComponent implements OnInit {
         if(customLimits[i].booking_limit == 0  || customLimits[i].booking_limit == "0"){
           console.log(customLimits[i].date)
             this.events.push({
-              title:'full',
+              title:'Full',
               start:new Date(customLimits[i].date),
             })  
         }
@@ -464,14 +464,14 @@ export class CheckoutComponent implements OnInit {
           if(customLimits[k].date == bookings[ij].booking_date){
             if(customLimits[k].booking_limit ==  bookings[ij].totalBookings){
               this.events.push({
-                title:'full',
+                title:'Full',
                 start:new Date(bookings[ij].booking_date),
               })  
             }
           }
           else if(bookings[ij]['totalBookings'] == limit){
             this.events.push({
-              title:'full',
+              title:'Full',
               start:new Date(bookings[ij].booking_date),
             })  
          }
@@ -552,7 +552,7 @@ export class CheckoutComponent implements OnInit {
           if(customLimits[i].limit_booking == 0  || customLimits[i].limit_booking == "0"){
             console.log(customLimits[i].date)
               this.eventsData.push({
-                title:'full',
+                title:'Full',
                 start:new Date(customLimits[i].date),
               })  
           }
@@ -564,14 +564,14 @@ export class CheckoutComponent implements OnInit {
             if(customLimits[k].date == bookings[ij].booking_date){
               if(customLimits[k].limit_booking ==  bookings[ij].totalBookings){
                 this.eventsData.push({
-                  title:'full',
+                  title:'Full',
                   start:new Date(bookings[ij].booking_date),
                 })  
               }
             }
             else if(bookings[ij]['totalBookings'] == limit){
               this.eventsData.push({
-                title:'full',
+                title:'Full',
                 start:new Date(bookings[ij].booking_date),
               })  
            }
