@@ -108,7 +108,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     ReactiveFormsModule,
     ToastrModule.forRoot(),
     FullCalendarModule,
-    NgxStripeModule.forRoot('pk_test_i2rFMVlrLofRcsWY0mPzbyNd001hlLYk8P'),
+    NgxStripeModule.forRoot('pk_live_51H4717LxRsUabul77h66XFnJZrck8Sn3Chm37xlMJDmQG5knT6Xhe6y2dkK2VzY8ClpjhpXf2qY7SAqaGEzcC1X4001yS1nGdw'),
     ModalModule.forRoot(),
     ToastrModule.forRoot({progressBar:true,preventDuplicates: true,timeOut:5000}), 
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
