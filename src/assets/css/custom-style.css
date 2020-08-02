@@ -515,6 +515,12 @@ ul.list.text-left{font-size: 14px;}
 .cal-disabled .cal-day-number {
     opacity: 0.1;
   }
+  .cal-week-view .cal-event {
+    background-color: red !important;
+    border-color: red !important;
+    color: white !important;
+}
+
 .tot-price h4{color:#152247;font-weight: bold;}
 .sidebar-text {
     margin-left: 20px;
