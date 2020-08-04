@@ -36,9 +36,12 @@ listProducts:any;
       total = total - 300
     }
     this.ngxService.start();
-    this.loginService.searchProducts({type:filter}).subscribe((result) => {
+    this.loginService.searchProducts({type:filter,filterRecords:filterRecords}).subscribe((result) => {
      
      this.listProducts = result["success"];
+     if(this.listProducts.length ==0){
+      this.router.navigateByUrl('/not-found')
+     }
      for(var j=0; j<this.listProducts.length; j++){
       this.listProducts[j].price = parseFloat(this.listProducts[j].boiler_price) + Number(total)
      }

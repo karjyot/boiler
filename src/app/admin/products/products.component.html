@@ -152,7 +152,7 @@
                           >
                        </div>
                     </div>
-                    <div class="col-md-6">
+                    <!-- <div class="col-md-6">
                         <div class="form-group"> 
                             <label for="email_id" class="control-label"> Type</label>
                         <select [(ngModel)]="signupData.type" class="custom-select" formControlName="type">
@@ -161,8 +161,20 @@
                        
                         </select>
                         </div>
-                       </div>
+                       </div> -->
                  </div>
+
+                 <div class="row" *ngFor="let xs of questions">
+                  <div class="col-md-12 mt-3">
+                     <label for="email_id" class="control-label"> {{xs.name}}</label>
+                     <select  class="custom-select" formControlName="type-{{xs.id}}">
+                        <option value="">Please Select</option>
+                        <option value = "{{cat.category}}" *ngFor="let cat of xs.categories"> {{cat.category}} </option> 
+                       </select>
+
+                     </div>
+                 </div>
+
 
                  <div class="row">
                   <div class="col-md-12">
@@ -328,7 +340,7 @@
                           >
                        </div>
                     </div>
-                    <div class="col-md-6">
+                    <!-- <div class="col-md-6">
                         <div class="form-group"> 
                             <label for="email_id" class="control-label"> Type</label>
                         <select [(ngModel)]="infos.type" class="custom-select" formControlName="type">
@@ -337,7 +349,18 @@
                        
                         </select>
                         </div>
-                       </div>
+                       </div> -->
+                 </div>
+
+                 <div class="row" *ngFor="let xs of questions">
+                  <div class="col-md-12 mt-3">
+                     <label for="email_id" class="control-label"> {{xs.name}}</label>
+                     <select  class="custom-select" formControlName="typeup-{{xs.id}}">
+                        <option value="">Please Select</option>
+                        <option value = "{{cat.category}}" *ngFor="let cat of xs.categories"> {{cat.category}} </option> 
+                       </select>
+
+                     </div>
                  </div>
 
                  <div class="row">

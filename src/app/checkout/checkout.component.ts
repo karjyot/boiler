@@ -219,7 +219,7 @@ export class CheckoutComponent implements OnInit {
 
   //this.postalCode = this.loginService.getPostalCode().postalCode
   this.stripeTest = this.formBuilder.group({
-    name: ['',[Validators.required]], 
+ 
     checkboxTerms:['',[Validators.required]]
    
 })
@@ -324,7 +324,7 @@ export class CheckoutComponent implements OnInit {
       return;
     }
     this.ngxService.start();  
-    const name = this.stripeTest.get('name').value;
+    const name = 'directHeating';
     this.stripeService
       .createToken(this.card.getCard(), { name })
       .subscribe(result => {
