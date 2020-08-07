@@ -44,7 +44,7 @@
                                      <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Username: activate to sort column descending" style="width: 281px;">Boiler Name</th>
                                 
                                      <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Username: activate to sort column descending" style="width: 281px;">Boiler Price</th>
-                                     <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Username: activate to sort column descending" style="width: 281px;">Type</th>
+                                     <!-- <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Username: activate to sort column descending" style="width: 281px;">Type</th> -->
                                      <th *ngIf="details && details.type != 'admin'" class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Actions: activate to sort column ascending" style="width: 391.2px;">Actions</th>
                                   </tr>
                                </thead>
@@ -53,7 +53,7 @@
                                      <td class="sorting_1 wordBreak">{{i+1}}</td>
                                      <td class="sorting_1 wordBreak">{{data.boiler_name}}</td>
                                      <td>{{data.boiler_price}}</td>
-                                     <td>{{data.type}}</td>
+                                     <!-- <td>{{data.type}}</td> -->
                                      <td *ngIf="details && details.type != 'admin'">
                                        
                                         <a class="btn btn-info" style="margin-right: 10px;" (click)="updateUser(updateUserPop,data)">
@@ -164,16 +164,32 @@
                        </div> -->
                  </div>
 
-                 <div class="row" *ngFor="let xs of questions">
-                  <div class="col-md-12 mt-3">
-                     <label for="email_id" class="control-label"> {{xs.name}}</label>
-                     <select  class="custom-select" formControlName="type-{{xs.id}}">
-                        <option value="">Please Select</option>
-                        <option value = "{{cat.category}}" *ngFor="let cat of xs.categories"> {{cat.category}} </option> 
-                       </select>
-
+               <div formArrayName="buyeremail" class="qa-set">
+                 
+                  <div class="frr" *ngFor="let item of buyerEmail.controls; let pointIndex=index;let last = last" [formGroupName]="pointIndex">
+                     <div class="col-md-12 text-center">
+                        <h4>Questions</h4>
                      </div>
-                 </div>
+                  <div class="row" *ngFor="let xs of questions">
+                    
+                     <div class="col-md-12 mt-3">
+                        <label for="email_id" class="control-label"> {{xs.name}}</label>
+                        <select  class="custom-select" formControlName="type{{xs.id}}">
+                           <option value="">Please Select</option>
+                           <option value = "{{cat.category}}" *ngFor="let cat of xs.categories"> {{cat.category}} </option> 
+                        </select>
+
+                        </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-md-12 float-right" style="text-align:right">
+                     <div class="mt-3"><button  class="btn btn-secondary mr-3" type="button" style="background:red;color:white;border:none;" (click)="deleteSellingPoint(pointIndex)" *ngIf="pointIndex!=0">Remove</button>
+                     <button  class="btn btn-secondary" type="button" style="background:#4362a7;color:white;border:none" (click)="addSellingPoint()" *ngIf="last">Add</button></div>
+                     </div>
+                  </div>
+             
+               </div>
+            </div>
 
 
                  <div class="row">
@@ -352,16 +368,32 @@
                        </div> -->
                  </div>
 
-                 <div class="row" *ngFor="let xs of questions">
-                  <div class="col-md-12 mt-3">
-                     <label for="email_id" class="control-label"> {{xs.name}}</label>
-                     <select  class="custom-select" formControlName="typeup-{{xs.id}}">
-                        <option value="">Please Select</option>
-                        <option value = "{{cat.category}}" *ngFor="let cat of xs.categories"> {{cat.category}} </option> 
-                       </select>
-
+                 <div formArrayName="buyeremailUpdate" class="qa-set">
+                 
+                  <div class="frr" *ngFor="let item of buyerEmailUpdate.controls; let pointIndex=index;let last = last" [formGroupName]="pointIndex">
+                     <div class="col-md-12 text-center">
+                        <h4>Questions</h4>
                      </div>
-                 </div>
+                  <div class="row" *ngFor="let xs of questions">
+                    
+                     <div class="col-md-12 mt-3">
+                        <label for="email_id" class="control-label"> {{xs.name}}</label>
+                        <select  class="custom-select" formControlName="type{{xs.id}}">
+                           <option value="">Please Select</option>
+                           <option value = "{{cat.category}}" *ngFor="let cat of xs.categories"> {{cat.category}} </option> 
+                        </select>
+
+                        </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-md-12 float-right" style="text-align:right">
+                     <div class="mt-3"><button  class="btn btn-secondary mr-3" type="button" style="background:red;color:white;border:none;" (click)="deleteSellingPointUpdate(pointIndex)" *ngIf="pointIndex!=0">Remove</button>
+                     <button  class="btn btn-secondary" type="button" style="background:#4362a7;color:white;border:none" (click)="addSellingPointUpdate()" *ngIf="last">Add</button></div>
+                     </div>
+                  </div>
+             
+               </div>
+            </div>
 
                  <div class="row">
                   <div class="col-md-12">

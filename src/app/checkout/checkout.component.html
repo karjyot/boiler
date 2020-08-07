@@ -9,15 +9,15 @@
           <div class="whats-next-steps">
             <div class="whats-next-step">
               <div class="whts-next-icon">1</div>
-              <p class="whts-next-text">We will process your order.</p>
+              <p class="whts-next-text">Select your install date and complete the details below.</p>
             </div>
             <div class="whats-next-step">
               <div class="whts-next-icon">2</div>
-              <p class="whts-next-text">Your video survey will take place at the date and time you choose.</p>
+              <p class="whts-next-text">We will carry out a "remote" survey of your boiler.</p>
             </div>
             <div class="whats-next-step">
               <div class="whts-next-icon">3</div>
-              <p class="whts-next-text">Your new boiler will be fitted on the day you choose.</p>
+              <p class="whts-next-text">Your boiler will be installed on the day you have selected.</p>
             </div>
           </div>
 
@@ -146,7 +146,7 @@
                       </div>
 
 
-                      <div class="card"  [ngClass]="{'disableRow':  !installationDate}">
+                      <!-- <div class="card"  [ngClass]="{'disableRow':  !installationDate}">
                         <div class="card-header" id="video">
                           <h5 class="mb-0" (click)="openVideo()">
                             
@@ -162,7 +162,7 @@
                               <p *ngIf="cmsData" [innerHtml] = "cmsData.videoText">
                               
                               </p>
-                              <!-- <p>Your installer will arrive between 7.30 - 9.30am and your delivery will arrive separately by courier. If anything changes, we’ll be in touch.</p><p>Don’t see the date you were after? Call us on <a href="tel://08001937777">0800 193 7777</a> and we’ll see if we can install sooner.</p> -->
+                             
                             </div>
                             <div class="col-md-4">
                               <div class="btn-group">
@@ -220,15 +220,15 @@
                           > </mwl-calendar-day-view>
                           </div>
                         </div>
-                      </div>
+                      </div> -->
                     
 
 
-                      <div class="card" [ngClass]="{'disableRow':  (!videDate)}">
+                      <div class="card" [ngClass]="{'disableRow':  (!installationDate)}">
                         <div class="card-header" id="headingTwo">
                           <h5 class="mb-0">
                             <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                              <div class="acc-title"><span>3</span><h4>Customer Details</h4></div>
+                              <div class="acc-title"><span>2</span><h4>Customer Details</h4></div>
                             </button>
                           </h5>
                         </div>
@@ -378,7 +378,7 @@
                         <div class="card-header" id="headingThree">
                           <h5 class="mb-0">
                             <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false"  href="#" aria-controls="collapseThree">
-                              <div class="acc-title"><span>4</span><h4>Payment : <b *ngIf="showPrice" style="color:green"> £{{finalPrice | number}} inc VAT
+                              <div class="acc-title"><span>3</span><h4>Payment : <b *ngIf="showPrice" style="color:green"> £{{finalPrice | number}} inc VAT
                               </b></h4></div>
                             </button>
                           </h5>

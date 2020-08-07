@@ -420,6 +420,23 @@ getAdDetails(){
 setadDetails(data){
   localStorage.setItem('adDetails',  JSON.stringify(data));
 }
+
+getBookingID(){
+  let details = localStorage.getItem('setBookingID');
+  return JSON.parse(details);
+}
+setBookingID(data){
+  localStorage.setItem('setBookingID',  JSON.stringify(data));
+}
+
+getfinalObj(){
+  let details = localStorage.getItem('finalObj');
+  return JSON.parse(details);
+}
+finalObj(data){
+  localStorage.setItem('finalObj',  JSON.stringify(data));
+}
+
 bookmarkDetails(id,userId){
   return this.http.get(AppSettings.API_ENDPOINT + 'listBookMarks/'+id + '/'+userId);
 }
@@ -498,6 +515,11 @@ getProducts() {
 addProduct(jsonPayload):Observable<any>{  
   return this.http.post(AppSettings.API_ENDPOINT + 'addProduct',jsonPayload);
 }
+
+getFilterRecordsData(id){
+  return this.http.get(AppSettings.API_ENDPOINT + 'getFilterRecords/'+id);
+}
+
 deleteProduct(id) {
   return this.http.get(AppSettings.API_ENDPOINT  + 'deleteProduct/'+id);
 } 

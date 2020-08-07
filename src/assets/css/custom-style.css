@@ -14,6 +14,23 @@ body{font-family: 'Open Sans', sans-serif !important;color: #132042;}
 .inner-page-content div{
     text-align: justify;
 }
+.customChoose{
+    color: white !important;
+    text-align: center !important;
+    cursor: pointer;
+    max-width: 117px;
+    text-align: center;
+    display: inline-block !important;
+}
+
+a.checkout-blk-button.customChoose1 {
+    background: #fff;
+    color: #152247 !important;
+    border: 1px solid #EC346B !important;
+    max-width: 117px;
+    text-align: center !important;
+    display: inline-block !important;
+}
 
 .label-bold{
     font-weight: bold;
@@ -865,4 +882,89 @@ margin-top: 14px;
     }}
 /************************* RESPONSIVE ENDS ***********************************/
 
- 
+.ng-untouched.ng-pristine.ng-valid.qa-set {
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 10px;margin-bottom:30px;
+}
+.qa-set h4{
+    text-transform:uppercase;
+    font-weight:500;
+}
+
+.frr{
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+.ord-img-right img{
+    width:200px;
+}
+.thank-you-pg .container {
+    width: 900px;
+    margin-top: 50px;
+}
+.thank-top-block h2{
+    font-size:26px!important;
+    font-weight:600!important;
+    color:#152247  !important;
+}
+.thank-top-block a{
+    padding:12px 30px;
+    border:2px solid #EC346B;
+    color:#EC346B;
+    display:inline-block;margin:20px 0px;
+}
+.text--block h5{
+    font-size:18px;font-weight:bold;line-height: 22px;
+}
+.thank-box{
+    width:870px;
+    margin:50px auto;border:3px solid #e6dddd;
+    padding:30px; position:relative;
+}
+/* .thank-box p {
+    font-size: 14px;
+} */
+
+.thank-box:after {
+    position: absolute;
+    content: "";
+    height: calc(100% - 50px);
+    width: 1px;
+    top: 25px;
+    left: 66%;
+    background-color: #e6dddd;
+}
+.item-block {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap; 
+}
+.block__left{
+    padding-right: 20px;
+}
+.block__right{
+    padding-left: 20px;
+}
+.item-name {
+    flex-basis: 80%;
+}
+/* .block__left{
+    border-right:1px solid grey; padding:0px 35px 0px 0px; 
+} */
+.no-gutters{
+    margin:0px !important;padding-left:0px important;padding-right:0px important;
+}
+
+.text--block{
+    margin-bottom:30px;
+}
+.item-block.total-pr{padding-top:15px;
+border-top:1px solid #e6dddd; 
+}
+.head--thankyou h3{
+    font-weight:bold !important;
+    font-size:24px !important;line-height:28px;    margin-bottom: 20px;
+}

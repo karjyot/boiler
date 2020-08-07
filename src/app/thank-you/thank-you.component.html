@@ -1,5 +1,79 @@
 <div class="thank-you-pg">
     <div class="container">
+        <div class="row">
+            <div class="col-md-9 col-sm-12">
+                <div class="thank-top-block">
+                    <h2>Thank you for your order</h2>
+                    <a href="thnk-btn">Order {{orderNo}}</a>
+                </div>               
+            </div>
+            <div class="col-md-3 col-sm-12">
+                <div class="ord-img-right">
+                    <!-- <img src="https://quote.directheating.co.uk/server/public/uploads/silver-nest.png"> -->
+                </div>                
+            </div>
+        </div>
+        <div class="thank-box">
+        <div class="row">
+            
+                <div class="col-md-8 col-sm-12 no-gutters">                    
+                    <div class="block__left head--thankyou">
+                        <h3>Your Order</h3>
+
+                        <div class="item-block" *ngIf="selectedBoiler">
+                            <div class="item-name">
+                                <p>{{selectedBoiler.boiler_name}} ({{productInfo[0].category}},{{productInfo[1].category}})</p>
+                            </div>
+                            <div class="item-price"><strong>£{{selectedBoiler.price}}</strong></div>
+                        </div> 
+                        <div class="item-block" *ngFor="let down of breakDowns">
+                            <div class="item-name">
+                                <p>{{down.name}}</p>
+                            </div>
+                            <div class="item-price"><strong>INCLUDED</strong></div>
+                        </div> 
+
+                        <div class="item-block">
+                            <div class="item-name">
+                                <p>{{controlObj.name}}</p>
+                            </div>
+                            <div class="item-price" *ngIf="controlObj.price !=0"><strong>£{{finalPrice}}</strong></div>
+                            <div class="item-price"*ngIf="controlObj.price ==0"><strong>FREE</strong></div>
+                        </div> 
+                        
+                        <div class="item-block total-pr">
+                            <div class="item-name">
+                                <p><strong>Total Price</strong></p>
+                            </div>
+                            <div class="item-price"><strong>£{{finalPrice}}</strong></div>
+                        </div> 
+                 
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12 no-gutters">
+                    <div class="block__right head--thankyou">     
+                        <h3>Installation details</h3>
+                        <div class="text--block">
+                            <h5>{{finalObj.installationDate |  date:'E, d MMMM y'}}</h5>
+                            <p>Your installer will arrive between 8am and 9am. If anything changes, we’ll be in touch.</p>
+                        </div>
+                        <div class="text--block">
+                            <h5>Installation Address</h5>
+                            <p [innerHTML] = "address"></p>
+                        </div>
+                        
+                    </div>          
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+<!-- <div class="thank-you-pg">
+    <div class="container">
         <h3 class="text-center d-block">Below is your booking detail!</h3>
         <div class="order-details">
         <div class="row align-items-center" *ngIf="finalObj" style="    border-bottom: 1px solid #cccc;
@@ -13,7 +87,7 @@
                         <h4>{{finalObj.product.boiler_name}}</h4>
                         <h5>{{finalObj.product.title}}</h5>
                         <div class="inst-date"><b>Installation Date:</b> {{finalObj.installationDate | date}}</div>
-                        <div class="vid-date"><b>Video Date:</b> {{finalObj.videoDate | date:'short'}}</div>
+                        <div class="vid-date"><b>Order No.:</b> {{orderNo}}</div>
                     </div>
                 </div>
                 <div class="col-sm-3">
@@ -57,4 +131,4 @@
         <h4 class="text-center d-block">Thank you for your order! your request has been submitted.
             <br> We will contact you soon.</h4>
     </div>
-</div>
+</div> -->

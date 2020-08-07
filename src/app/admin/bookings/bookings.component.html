@@ -42,7 +42,7 @@
                                     <!-- <th style="width:200px;">Installation Address</th>-->
                                     <th style="width:150px;">Installation Postal</th> 
                                     <th style="width:200px;">price</th>
-                                    <th style="width:200px;">Video Date</th>
+                                    <!-- <th style="width:200px;">Video Date</th> -->
                                     <th style="width:200px;">Details</th>
                                     <th style="width:200px;">Status</th>
                                      <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Actions: activate to sort column ascending" style="width: 200.2px;">Actions</th>
@@ -56,7 +56,7 @@
                                     <td class="wordBreak">{{item.full_postal}}</td>
                                   
                                     <td class="wordBreak">£{{item.price | number}}</td>
-                                    <td class="wordBreak">{{item.video_date | date:'short'}}</td>
+                                    <!-- <td class="wordBreak">{{item.video_date | date:'short'}}</td> -->
                                     <td class="wordBreak" style="cursor: pointer;"><a (click)="viewUserInfo(info,item)">View</a></td>
                                 
                                     <td>
@@ -165,10 +165,10 @@
                <p>{{fullDetails.booking_date}}</p>
              </div>
 
-             <div class="col-md-4">
+             <!-- <div class="col-md-4">
                <label class="label-bold">Video Date</label> 
                <p>{{fullDetails.video_date | date:'short'}}</p>
-             </div>
+             </div> -->
       </div>
 
       <div class="row">

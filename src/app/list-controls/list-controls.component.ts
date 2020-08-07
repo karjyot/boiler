@@ -38,7 +38,7 @@ export class ListControlsComponent implements OnInit {
   }
 
   getControls(){
-
+this.ngxService.start()
     this.loginService.getControls().subscribe((result) => {
 
      var controls = result["success"];
@@ -53,7 +53,7 @@ export class ListControlsComponent implements OnInit {
       }
     }
     this.controls =  controls
-
+    this.ngxService.stop()
     this.controls.sort((val1, val2)=> {return <any> (val1.price) - <any>  
       (val2.price)})
       this.ngxService.stop();   
@@ -100,11 +100,17 @@ selectControl(value){
 filterControls(id){
   
 for(var i=0; i<this.controls.length; i++){
+  
   if(this.controls[i].id == id){
-
-    return this.controls[i];
+    this.controls[i].isChecked  = true
+    var controlVAlue = this.controls[i];
+ 
+  }else{
+    this.controls[i].isChecked  = false
   }
+  
 }
+return controlVAlue;
 }
 installDate(){
   this.router.navigateByUrl('/order')

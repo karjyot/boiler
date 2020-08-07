@@ -243,8 +243,8 @@ export class CheckoutComponent implements OnInit {
 
       this.installationDate = moment(arg.day.date).format( 'YYYY-MM-DD  HH:mm:ss' )
       $("#collapseOne").collapse('dispose');
-      $("#videoOne").collapse('show');
-      var p = $( "#videoOne" ).first();
+      $("#collapseTwo").collapse('show');
+      var p = $( "#collapseTwo" ).first();
       var position = p.position();
       
         $('html, body').animate({
@@ -283,7 +283,15 @@ export class CheckoutComponent implements OnInit {
 
  
 
-
+makeid(length) {
+  var result           = '';
+  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  var charactersLength = characters.length;
+  for ( var i = 0; i < length; i++ ) {
+     result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
 
   buy() {
     this.addressCheck()
@@ -303,6 +311,7 @@ export class CheckoutComponent implements OnInit {
     // }
 
    // this.controlObj = this.filterControls();
+   let orderNo = this.makeid(9)
     let finalObj = {
       "installationDate":this.installationDate,
       "videoDate": moment(this.videDate).format( 'YYYY-MM-DD  HH:mm:ss' ),
@@ -313,9 +322,10 @@ export class CheckoutComponent implements OnInit {
       "postalCode":this.loginService.getPostalCode(),
       "googleAddress":this.googleAddress,
       "address":this.installationForm.value,
-      "controls":this.controlObj
+      "controls":this.controlObj,
+      "orderNo.":orderNo
     };
-
+    this.loginService.finalObj(finalObj)
    
 
 
@@ -333,7 +343,7 @@ export class CheckoutComponent implements OnInit {
           finalObj["name"] = name
      this.loginService.confirmOrder(finalObj).subscribe((result) => {
        this.loginService.setFinalObj(finalObj)
-      
+       this.loginService.setBookingID({bookingID:orderNo})
     this.router.navigateByUrl('/confirmation')
        this.ngxService.stop();   
       }, (err) => {
@@ -343,7 +353,8 @@ export class CheckoutComponent implements OnInit {
 
 
         } else if (result.error) {
-          this.toastr.error("Your details are incomplete.")
+        
+          this.toastr.error(result.error.message)
           this.ngxService.stop();  
         }
       });

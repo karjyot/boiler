@@ -2,7 +2,7 @@ import { Component, OnInit,ChangeDetectionStrategy } from '@angular/core';
 import { AdminService } from "./../services/admin.service";
 import { LoginService } from "./../../services/login.service";
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { FormBuilder,FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder,FormArray,FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { ToastrService } from 'ngx-toastr';
 import { Router } from "@angular/router";
@@ -50,7 +50,7 @@ details:any;
       price: ['', [Validators.required]],
       about: [''],
       name: ['', [Validators.required]],
-     // type: ['gas', [Validators.required]],
+      buyeremailUpdate:  this.formBuilder.array([this.formBuilder.group({type1:'',type2:'',type3:'',type4:'',type5:'',type6:'',type7:'',type8:'',type9:'',type10:''})]),// type: ['gas', [Validators.required]],
       feature : [''],
       feature1 : [''],
       feature2 : [''],
@@ -66,6 +66,7 @@ details:any;
       title: ['', [Validators.required]],
       price: ['', [Validators.required]],
       name: ['', [Validators.required]],
+      buyeremail:  this.formBuilder.array([this.formBuilder.group({type1:'',type2:'',type3:'',type4:'',type5:'',type6:'',type7:'',type8:'',type9:'',type10:''})]),
      // type: ['', [Validators.required]],
       feature : [''],
       feature1 : [''],
@@ -105,8 +106,8 @@ details:any;
  
  
        for(var i=0; i<questions.length; i++){
-        this.signupForm.addControl('type-'+ questions[i].id,new FormControl(''));
-        this.updateInfo.addControl('typeup-'+ questions[i].id,new FormControl(''));
+       // this.signupForm.addControl('type-'+ questions[i].id,new FormControl(''));
+        //this.updateInfo.addControl('typeup-'+ questions[i].id,new FormControl(''));
          questions[i]["categories"] = [];
          for(var j=0; j<categories.length; j++){
            if(categories[j].question_id == questions[i].id)
@@ -118,7 +119,7 @@ details:any;
  
        }
        this.questions = questions
-       console.log(this.questions)
+       
        this.questions.sort((val1, val2)=> {return <any> val1.order_question - <any>val2.order_question})
         this.ngxService.stop();
    
@@ -137,8 +138,17 @@ details:any;
 
   
   }
+  get buyerEmail() {    return this.signupForm.get('buyeremail') as FormArray;  }
+  deleteSellingPoint(index) {    this.buyerEmail.removeAt(index);  }
+  addSellingPoint() {    this.buyerEmail.push(this.formBuilder.group({type1:'',type2:'',type3:'',type4:'',type5:'',type6:'',type7:'',type8:'',type9:'',type10:''}));  }
+
+  get buyerEmailUpdate() {    return this.updateInfo.get('buyeremailUpdate') as FormArray;  }
+  deleteSellingPointUpdate(index) {    this.buyerEmailUpdate.removeAt(index);  }
+  addSellingPointUpdate() {    this.buyerEmailUpdate.push(this.formBuilder.group({type1:'',type2:'',type3:'',type4:'',type5:'',type6:'',type7:'',type8:'',type9:'',type10:''}));  }
+
 
   addUser(template: any){
+    this.signupForm.get('buyeremail').reset();
     this.modalRefAdd = this.modalService.show(
       template,
       Object.assign({}, { class: 'gray modal-lg' })
@@ -149,6 +159,7 @@ details:any;
     this.signupData.title = "";
     this.signupData.price = "";
     this.signupData.about = "";
+    (this.buyerEmail as any).readOnlyProperty = []
     this.modalRefAdd.hide();
 
   }
@@ -170,17 +181,17 @@ details:any;
       formData.append('name', this.signupData.name);
       formData.append('title', this.signupData.title);
       formData.append('price', this.signupData.price);
-     
+      formData.append('filters', JSON.stringify(this.signupForm.value.buyeremail));
 
-      formData.append('type', this.signupForm.value["type-2"]);
-      formData.append('convert_commbi', this.signupForm.value["type-4"]);
-      formData.append('curently_have', this.signupForm.value["type-3"]);
-      formData.append('where_install', this.signupForm.value["type-5"]);
-      formData.append('property', this.signupForm.value["type-6"]);
-      formData.append('bedrooms', this.signupForm.value["type-7"]);
-      formData.append('baths', this.signupForm.value["type-8"]);
-      formData.append('showers', this.signupForm.value["type-9"]);
-      formData.append('flue_exit', this.signupForm.value["type-10"]);
+      // formData.append('type', this.signupForm.value["type-2"]);
+      // formData.append('convert_commbi', this.signupForm.value["type-4"]);
+      // formData.append('curently_have', this.signupForm.value["type-3"]);
+      // formData.append('where_install', this.signupForm.value["type-5"]);
+      // formData.append('property', this.signupForm.value["type-6"]);
+      // formData.append('bedrooms', this.signupForm.value["type-7"]);
+      // formData.append('baths', this.signupForm.value["type-8"]);
+      // formData.append('showers', this.signupForm.value["type-9"]);
+      // formData.append('flue_exit', this.signupForm.value["type-10"]);
 
       
 
@@ -235,20 +246,32 @@ details:any;
     this.infos.about =  userDetails.about;
     this.userId = userDetails.id
     this.urls =  userDetails.image;
-    this.updateInfo.controls['typeup-2'].setValue(userDetails.type);
-    this.updateInfo.controls['typeup-3'].setValue(userDetails.curently_have);
-    this.updateInfo.controls['typeup-4'].setValue(userDetails.convert_commbi);
-    this.updateInfo.controls['typeup-5'].setValue(userDetails.where_install);
-    this.updateInfo.controls['typeup-6'].setValue(userDetails.property);
-    this.updateInfo.controls['typeup-7'].setValue(userDetails.bedrooms);
-    this.updateInfo.controls['typeup-8'].setValue(userDetails.baths);
-    this.updateInfo.controls['typeup-9'].setValue(userDetails.showers);
-    this.updateInfo.controls['typeup-10'].setValue(userDetails.flue_exit);
+    this.ngxService.start();
+    
+    this.loginService.getFilterRecordsData(userDetails.id).subscribe((result) => {
+      this.buyerEmailUpdate.removeAt(0)
+      let data = result['success'];
+    
+      for(var i=0; i<data.length; i++){    
+         this.buyerEmailUpdate.push(this.formBuilder.group({type2:data[i].type,type3:data[i].curently_have,type4:data[i].convert_commbi,type5:data[i].where_install,type6:data[i].property,type7:data[i].bedrooms,type8:data[i].baths,type9:data[i].showers,type10:data[i].flue_exit,id:data[i].id,boiler_id:data[i].boiler_id})); 
+       }
+      console.log(this.buyerEmailUpdate)
+      this.ngxService.stop();
+     
+     }, (err) => {
+
+       
+        this.toastr.error("Internal Server Error.",);
+        this.ngxService.stop();
+      
+     });
+
+   
 
 
   }
   update(){
-   
+   console.log(this.updateInfo.value)
         this.submitted = true;
         if (this.updateInfo.invalid) {
           this.toastr.error('Please provide the required information.');
@@ -274,16 +297,17 @@ details:any;
       formData.append('feature6', this.infos.feature6);
       formData.append('feature7', this.infos.feature7);
       formData.append('feature8', this.infos.feature8);
+      formData.append('filters', JSON.stringify(this.updateInfo.value.buyeremailUpdate));
       
-      formData.append('type', this.updateInfo.value["typeup-2"]);
-      formData.append('convert_commbi', this.updateInfo.value["typeup-4"]);
-      formData.append('curently_have', this.updateInfo.value["typeup-3"]);
-      formData.append('where_install', this.updateInfo.value["typeup-5"]);
-      formData.append('property', this.updateInfo.value["typeup-6"]);
-      formData.append('bedrooms', this.updateInfo.value["typeup-7"]);
-      formData.append('baths', this.updateInfo.value["typeup-8"]);
-      formData.append('showers', this.updateInfo.value["typeup-9"]);
-      formData.append('flue_exit', this.updateInfo.value["typeup-10"]);
+      // formData.append('type', this.updateInfo.value["typeup-2"]);
+      // formData.append('convert_commbi', this.updateInfo.value["typeup-4"]);
+      // formData.append('curently_have', this.updateInfo.value["typeup-3"]);
+      // formData.append('where_install', this.updateInfo.value["typeup-5"]);
+      // formData.append('property', this.updateInfo.value["typeup-6"]);
+      // formData.append('bedrooms', this.updateInfo.value["typeup-7"]);
+      // formData.append('baths', this.updateInfo.value["typeup-8"]);
+      // formData.append('showers', this.updateInfo.value["typeup-9"]);
+      // formData.append('flue_exit', this.updateInfo.value["typeup-10"]);
 
 
        this.loginService.updateProduct(formData,this.userId).subscribe((result) => {
