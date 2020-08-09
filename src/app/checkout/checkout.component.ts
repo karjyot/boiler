@@ -97,7 +97,7 @@ export class CheckoutComponent implements OnInit {
   viewDate2:any;
   videDate:any;
   showAddressInstall = false
-
+  displayDate : any;
   searchCode = false
   showAddressPostalCode =false
   addressForm:FormGroup;
@@ -240,7 +240,7 @@ export class CheckoutComponent implements OnInit {
     return
     }
     if(!date){
-
+      this.displayDate = moment(arg.day.date).format( 'ddd, DD MMMM y' )
       this.installationDate = moment(arg.day.date).format( 'YYYY-MM-DD  HH:mm:ss' )
       $("#collapseOne").collapse('dispose');
       $("#collapseTwo").collapse('show');
